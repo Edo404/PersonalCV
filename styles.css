@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -5,7 +7,7 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Courier New', Arial, sans-serif;
     width: 100%;
     background-color: #f8f8f8;
     color: #333;
@@ -67,6 +69,8 @@ button{
     border-color: orange;
     color: orange;
     background-color: #f8f8f8;
+    cursor: pointer;
+    margin-top: 10px;
 }
 
 .profile-pic {
