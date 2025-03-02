@@ -4,12 +4,127 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Curriculum di Edoardo</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            width: 100%;
+            background-color: #f8f8f8;
+            color: #333;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #000;
+            padding: 15px 30px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .logo img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links li a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .nav-links li a:hover {
+            color: orange;
+        }
+
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            width: 100%;
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding-top: 70px;
+        }
+
+        .profile-pic {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            margin-right: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 50px;
+            color: black;
+        }
+
+        section {
+            padding: 50px 20px;
+            max-width: 2000px;
+            margin: auto;
+            width: 100%;
+            text-align: center;
+        }
+
+        .education-container, .experience-container {
+            display: flex;
+            justify-content: space-between;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        .education-info, .experience-info {
+            flex: 1;
+            font-weight: bold;
+        }
+
+        .education-details, .experience-details {
+            flex: 1;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        footer {
+            text-align: center;
+            background-color: #000;
+            color: white;
+            padding: 15px 0;
+            margin-top: 50px;
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
     <header>
         <nav class="navbar">
-            <div class="logo"><img src="logo.png" alt="Logo"></div>
+            <div class="logo"><img src="2o.png" alt="Logo"></div>
             <ul class="nav-links">
                 <li><a href="#about">About</a></li>
                 <li><a href="#education">Education</a></li>
@@ -22,14 +137,17 @@
     
     <section class="hero">
         <div class="hero-content">
-            <img src="foto.jpg" alt="Edoardo" class="profile-pic">
+            <img src="2o.png" alt="Edoardo" class="profile-pic">
             <h1>Ciao! Sono Edoardo, scorri per vedere il mio Curriculum!</h1>
         </div>
     </section>
     
     <section id="about">
         <h2>About</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur scelerisque, elit at facilisis elementum, tortor lorem consectetur felis, id blandit ipsum urna et libero...</p>
+        <p><strong>Hello, I'm Edoardo!</strong> I'm a <strong>Computer Science graduate</strong> who started out as an <strong>IT Consultant</strong>, but my curiosity and ambition are steering me toward the world of <strong>Project and Product Management</strong>. I love the challenge of building things, whether it's software, strategies, or my dream of running my own business one day! (industry TBD, but I'm working on it 😊).            
+            Outside of work, you'll probably find me behind a <strong>drum kit</strong>. I'm a semi-professional <strong>drummer</strong> with a deep love for <strong>funk, R&B, and pretty much any genre that grooves</strong>. When I'm not drumming, I'm diving into <strong>personal finance</strong>, figuring out how to make money work <strong>for</strong> me (and not the other way around).
+            I have a bit of an addiction to <strong>watches</strong> and <strong>cars</strong>, the kind that makes me spend way too much time reading, researching, and maybe daydreaming about my next purchase.            
+            Let's connect! I'm always up for talking about <strong>tech, business, music, finance</strong>, or just geeking out over a great <strong>timepiece</strong> or <strong>classic car</strong>! 🚀🥁⌚🚗</p>
     </section>
     
     <section id="education">
