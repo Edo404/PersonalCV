@@ -35,7 +35,7 @@
         body {
             background-color: var(--primary-light);
             color: var(--gray-800);
-            line-height: 1.6;
+            /* line-height: 1.6; */
             overflow-x: hidden;
         }
         
@@ -73,7 +73,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            padding: 1.5rem 2rem;
+            padding: 1rem 2rem;
             z-index: 100;
             transition: var(--transition);
             background-color: transparent;
@@ -82,7 +82,7 @@
         header.scrolled {
             background-color: var(--primary-light);
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-            padding: 1rem 2rem;
+            padding: 0.5rem 2rem;
         }
         
         .logo {
@@ -288,6 +288,7 @@
             height: 200px;
             background-color: var(--gray-300);
             overflow: hidden;
+            text-align: center;
         }
         
         .project-image img {
@@ -506,7 +507,9 @@
     <!-- Header -->
     <header>
         <nav class="container">
-            <a href="#home" class="logo">Edoardo Gamurrini</a>
+            <a href="#home" class="logo">
+                <img src="2o.png" alt="Your Name" style="width: 50px; height: 50px; border-radius: 50%; border-style: solid; border-width: 2px; border-color: var(--gray-400)">
+            </a>
             <ul class="nav-links">
                 <li><a href="#about">About</a></li>
                 <li><a href="#projects">Posts</a></li>
@@ -520,9 +523,9 @@
     <section class="hero" id="home">
         <div class="container">
             <div class="hero-content fade-in">
-                <h1>Hello, I'm <span style="color: var(--secondary);">Edoardo</span></h1>
+                <h1>Hello, I'm <span style="color: var(--secondary);">Edoardo!</span></h1>
                 <h2 class="fade-in delay-1">I'm a Information Technology Junior Consultant | Mobile & Cloud</h2>
-                <p class="fade-in delay-2">A brief introduction about yourself and what you do. Highlight your expertise and what makes you unique in your field.</p>
+                <p class="fade-in delay-2">Creative aspiring Project/Product Manager with a passion for innovation. My dream is to build my own business and drive impactful solutions</p>
                 <div class="fade-in delay-3">
                     <a href="#projects" class="btn">View My Blog</a>
                     <a href="#contact" class="btn btn-outline">Contact Me</a>
@@ -558,19 +561,19 @@
                 <!-- Project 1 -->
                 <div class="project-card">
                     <div class="project-image">
-                        <img src="/api/placeholder/600/400" alt="Project 1">
+                        <img src="postsPics/product-management-basics-certification (2).png" alt="Project 1" style="width: 200px; height: 200px;">
                     </div>
                     <div class="project-content">
-                        <h3>Project One</h3>
-                        <p>Description of the project, what problems it solves, and your role in it.</p>
+                        <h3>Product Management Basics</h3>
+                        <p>Product Management Basics Certification by Pendo.io taken on February 2025</p>
                         <div class="project-tags">
-                            <span class="project-tag">Tag 1</span>
-                            <span class="project-tag">Tag 2</span>
-                            <span class="project-tag">Tag 3</span>
+                            <span class="project-tag">Certification</span>
+                            <span class="project-tag">Product Management</span>
+                            <span class="project-tag">Pendo.io</span>
                         </div>
                         <div class="project-links">
-                            <a href="#" class="btn">View Project</a>
-                            <a href="#" class="btn btn-outline">Source Code</a>
+                            <a href="https://www.credly.com/badges/44edc293-e20c-458d-9e63-bbaf9267e1a0" class="btn">View Post</a>
+                            <!-- <a href="#" class="btn btn-outline">Source Code</a> -->
                         </div>
                     </div>
                 </div>
@@ -578,19 +581,19 @@
                 <!-- Project 2 -->
                 <div class="project-card">
                     <div class="project-image">
-                        <img src="/api/placeholder/600/400" alt="Project 2">
+                        <img src="postsPics/product-analytics-certification (2).png" alt="Project 2" style="width: 200px; height: 200px;">
                     </div>
                     <div class="project-content">
-                        <h3>Project Two</h3>
-                        <p>Description of the project, what problems it solves, and your role in it.</p>
+                        <h3>Product Analytics</h3>
+                        <p>Product Analytics Certification by Pendo.io taken on February 2025</p>
                         <div class="project-tags">
-                            <span class="project-tag">Tag 1</span>
-                            <span class="project-tag">Tag 2</span>
-                            <span class="project-tag">Tag 3</span>
+                            <span class="project-tag">Certification</span>
+                            <span class="project-tag">Product Management</span>
+                            <span class="project-tag">Pendo.io</span>
                         </div>
                         <div class="project-links">
-                            <a href="#" class="btn">View Project</a>
-                            <a href="#" class="btn btn-outline">Source Code</a>
+                            <a href="https://www.credly.com/badges/98a04564-1af9-463b-beab-174276cd8c7c" class="btn">View Post</a>
+                            <!-- <a href="#" class="btn btn-outline">Source Code</a> -->
                         </div>
                     </div>
                 </div>
@@ -598,21 +601,41 @@
                 <!-- Project 3 -->
                 <div class="project-card">
                     <div class="project-image">
-                        <img src="/api/placeholder/600/400" alt="Project 3">
+                        <img src="postsPics/CertificateOfCompletion_Scrum The Basics (1)_page-0001.jpg" alt="Project 3" style="width: 270px; height: 200px;">
                     </div>
                     <div class="project-content">
-                        <h3>Project Three</h3>
-                        <p>Description of the project, what problems it solves, and your role in it.</p>
+                        <h3>Scrum: The Basics</h3>
+                        <p>Scrum Certification by Project Management Institute taken on February 2025</p>
                         <div class="project-tags">
-                            <span class="project-tag">Tag 1</span>
-                            <span class="project-tag">Tag 2</span>
-                            <span class="project-tag">Tag 3</span>
+                            <span class="project-tag">Certification</span>
+                            <span class="project-tag">Project Management</span>
+                            <span class="project-tag">PMI</span>
                         </div>
                         <div class="project-links">
-                            <a href="#" class="btn">View Project</a>
-                            <a href="#" class="btn btn-outline">Source Code</a>
+                            <a href="https://www.linkedin.com/learning/certificates/bd40b6a13e5afcae7ea0c408caa95919ed8221ee7b42947622762a46ff796997?trk=share_certificate&lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_certifications_details%3BD1Y1bv5NR2qyS084LieIPg%3D%3D" class="btn">View Post</a>
+                            <!-- <a href="#" class="btn btn-outline">Source Code</a> -->
                         </div>
                     </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="postsPics/PL-400_2025exp_page-0001.jpg" alt="Project 4">
+                    </div>
+                    <div class="project-content">
+                        <h3>Microsoft PL-400</h3>
+                        <p>Power Platform Developer Associate by Microsoft taken on October 2023 expiring in October 2025</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Certification</span>
+                            <span class="project-tag">Power Platform</span>
+                            <span class="project-tag">Microsoft</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://learn.microsoft.com/en-us/users/edoardogamurrini-1090/credentials/c07a5e0f8ccf2a3d?ref=https%3A%2F%2Fwww.linkedin.com%2F" class="btn">View Post</a>
+                            <!-- <a href="#" class="btn btn-outline">Source Code</a> -->
+                        </div>
+                    </div>                
                 </div>
             </div>
         </div>
