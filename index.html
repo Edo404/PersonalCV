@@ -263,6 +263,33 @@
             transform: translateX(-50%);
         }
         
+        /* Filter button styling */
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .filter-btn {
+            padding: 0.5rem 1.5rem;
+            background-color: var(--gray-200);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: var(--transition);
+            color: var(--gray-700);
+        }
+        
+        .filter-btn:hover {
+            background-color: var(--gray-300);
+        }
+        
+        .filter-btn.active {
+            background-color: var(--secondary);
+            color: white;
+        }
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -467,45 +494,6 @@
         .delay-3 {
             animation-delay: 0.6s;
         }
-        
-
-
-
-
-
-        /* Filter button styling */
-    .filter-buttons {
-        display: flex;
-        justify-content: center;
-        gap: 1rem;
-        margin-bottom: 2rem;
-    }
-    
-    .filter-btn {
-        padding: 0.5rem 1.5rem;
-        background-color: var(--gray-200);
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        font-weight: 500;
-        transition: var(--transition);
-        color: var(--gray-700);
-    }
-    
-    .filter-btn:hover {
-        background-color: var(--gray-300);
-    }
-    
-    .filter-btn.active {
-        background-color: var(--secondary);
-        color: white;
-    }
-
-
-
-
-
-
 
         /* Responsive */
         @media (max-width: 768px) {
@@ -828,61 +816,55 @@
             el.style.transform = 'translateY(20px)';
             observer.observe(el);
         });
-
-
-
-
-
-
-    // Filter functionality
-    document.addEventListener('DOMContentLoaded', function() {
-        const certBtn = document.getElementById('certifications-btn');
-        const projBtn = document.getElementById('projects-btn');
-        const certCards = document.querySelectorAll('.certification-card');
-        const projCards = document.querySelectorAll('.project-card-only');
-        
-        // Initial state - show only certifications
-        showCertifications();
-        
-        // Button event listeners
-        certBtn.addEventListener('click', function() {
+        // Filter functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const certBtn = document.getElementById('certifications-btn');
+            const projBtn = document.getElementById('projects-btn');
+            const certCards = document.querySelectorAll('.certification-card');
+            const projCards = document.querySelectorAll('.project-card-only');
+            
+            // Initial state - show only certifications
             showCertifications();
+            
+            // Button event listeners
+            certBtn.addEventListener('click', function() {
+                showCertifications();
+            });
+            
+            projBtn.addEventListener('click', function() {
+                showProjects();
+            });
+            
+            function showCertifications() {
+                // Update buttons
+                certBtn.classList.add('active');
+                projBtn.classList.remove('active');
+                
+                // Show certifications, hide projects
+                certCards.forEach(card => {
+                    card.style.display = 'flex';
+                });
+                
+                projCards.forEach(card => {
+                    card.style.display = 'none';
+                });
+            }
+            
+            function showProjects() {
+                // Update buttons
+                projBtn.classList.add('active');
+                certBtn.classList.remove('active');
+                
+                // Show projects, hide certifications
+                projCards.forEach(card => {
+                    card.style.display = 'flex';
+                });
+                
+                certCards.forEach(card => {
+                    card.style.display = 'none';
+                });
+            }
         });
-        
-        projBtn.addEventListener('click', function() {
-            showProjects();
-        });
-        
-        function showCertifications() {
-            // Update buttons
-            certBtn.classList.add('active');
-            projBtn.classList.remove('active');
-            
-            // Show certifications, hide projects
-            certCards.forEach(card => {
-                card.style.display = 'flex';
-            });
-            
-            projCards.forEach(card => {
-                card.style.display = 'none';
-            });
-        }
-        
-        function showProjects() {
-            // Update buttons
-            projBtn.classList.add('active');
-            certBtn.classList.remove('active');
-            
-            // Show projects, hide certifications
-            projCards.forEach(card => {
-                card.style.display = 'flex';
-            });
-            
-            certCards.forEach(card => {
-                card.style.display = 'none';
-            });
-        }
-    });
     </script>
 </body>
 </html>
