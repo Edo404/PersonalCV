@@ -641,36 +641,47 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
-        <div class="container">
-            <h2>Get In Touch</h2>
-            <p>Feel free to reach out if you're looking for a collaborator, have a question, or just want to connect.</p>
+<!-- Contact Section -->
+<section class="contact" id="contact">
+    <div class="container">
+        <h2>Get In Touch</h2>
+        <p>Feel free to reach out if you're looking for a collaborator, have a question, or just want to connect.</p>
+        
+        <!-- Updated form with Netlify attributes -->
+        <form class="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+            <!-- Hidden input to identify the form name for Netlify -->
+            <input type="hidden" name="form-name" value="contact" />
             
-            <form class="contact-form">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Your Name" required>
-                </div>
-                <div class="form-group">
-                    <input type="email" class="form-control" placeholder="Your Email" required>
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Subject" required>
-                </div>
-                <div class="form-group">
-                    <textarea class="form-control" rows="5" placeholder="Your Message" required></textarea>
-                </div>
-                <button type="submit" class="submit-btn">Send Message</button>
-            </form>
+            <!-- Honeypot field to prevent spam -->
+            <p style="display: none;">
+                <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+            </p>
             
-            <div class="social-links">
-                <a href="https://www.linkedin.com/in/edoardo-gamurrini/" class="social-link">
-                    <i style="font-size:24px" class="fa">&#xf08c;</i>
-                </a>
-                <!-- <a href="#" class="social-link"></a> -->
+            <!-- Hidden field to specify recipient email -->
+            <input type="hidden" name="notification-email" value="edoardogamurrini@gmail.com" />
+            
+            <div class="form-group">
+                <input type="text" name="name" class="form-control" placeholder="Your Name" required>
             </div>
+            <div class="form-group">
+                <input type="email" name="email" class="form-control" placeholder="Your Email" required>
+            </div>
+            <div class="form-group">
+                <input type="text" name="subject" class="form-control" placeholder="Subject" required>
+            </div>
+            <div class="form-group">
+                <textarea name="message" class="form-control" rows="5" placeholder="Your Message" required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Send Message</button>
+        </form>
+        
+        <div class="social-links">
+            <a href="https://www.linkedin.com/in/edoardo-gamurrini/" class="social-link">
+                <i style="font-size:24px" class="fa">&#xf08c;</i>
+            </a>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- Footer -->
     <footer>
