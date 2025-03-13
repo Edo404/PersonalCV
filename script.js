@@ -148,3 +148,73 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 	}
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+	const banner = document.getElementById("cookie-banner");
+	const acceptBtn = document.getElementById("accept-cookies");
+	const declineBtn = document.getElementById("decline-cookies");
+
+	// Mostra il banner se non è stato ancora fatto una scelta
+	if (!localStorage.getItem("cookiePreference")) {
+		setTimeout(() => banner.classList.add("show"), 1000);
+	}
+
+	// Accetta i cookie
+	acceptBtn.addEventListener("click", function () {
+		localStorage.setItem("cookiePreference", "accepted");
+		banner.classList.remove("show");
+		enableTrackingCookies();
+	});
+
+	// Rifiuta i cookie
+	declineBtn.addEventListener("click", function () {
+		localStorage.setItem("cookiePreference", "declined");
+		banner.classList.remove("show");
+		disableTrackingCookies();
+	});
+
+	// Blocca i cookie se l'utente li ha rifiutati
+	if (localStorage.getItem("cookiePreference") === "declined") {
+		disableTrackingCookies();
+	} else if (localStorage.getItem("cookiePreference") === "accepted") {
+		enableTrackingCookies();
+	}
+});
+
+// Funzione per bloccare Google Analytics & Tracking
+function disableTrackingCookies() {
+	window["ga-disable-UA-XXXXX-Y"] = true;
+	console.log("❌ Tracking disabilitato");
+}
+
+// Funzione per attivare Google Analytics & Tracking
+function enableTrackingCookies() {
+	console.log("✅ Tracking attivato");
+	(function (i, s, o, g, r, a, m) {
+		i["GoogleAnalyticsObject"] = r;
+		(i[r] =
+			i[r] ||
+			function () {
+				(i[r].q = i[r].q || []).push(arguments);
+			}),
+			(i[r].l = 1 * new Date());
+		(a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+		a.async = 1;
+		a.src = g;
+		m.parentNode.insertBefore(a, m);
+	})(
+		window,
+		document,
+		"script",
+		"https://www.google-analytics.com/analytics.js",
+		"ga"
+	);
+
+	ga("create", "UA-XXXXX-Y", "auto");
+	ga("send", "pageview");
+}
+
+// Funzione per riaprire il banner e modificare la scelta
+function showBanner() {
+	document.getElementById("cookie-banner").classList.add("show");
+}

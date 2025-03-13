@@ -470,6 +470,78 @@ footer {
     color: var(--primary-light);
 }
 
+/* --- COOKIE BANNER --- */
+.cookie-banner {
+	position: fixed;
+	bottom: -200px;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 90%;
+	max-width: 400px;
+	background: rgba(0, 0, 0, 0.9);
+	color: white;
+	padding: 15px 20px;
+	text-align: center;
+	border-radius: 15px;
+	font-size: 14px;
+	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+	transition: bottom 0.5s ease-in-out;
+	z-index: 999;
+}
+
+.cookie-banner.show {
+	bottom: 20px;
+}
+
+.buttons {
+	margin-top: 10px;
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+}
+
+.cookie-banner button {
+	padding: 8px 15px;
+	border-radius: 20px;
+	border: none;
+	cursor: pointer;
+	font-weight: bold;
+}
+
+#accept-cookies {
+	background-color: var(--gray-300);
+	color: black;
+}
+
+#accept-cookies:hover {
+	background-color: var(--secondary-dark);
+}
+
+#decline-cookies:hover {
+	background-color: var(--gray-600);
+}
+
+/* --- PULSANTE MODIFICA COOKIE --- */
+.cookie-settings {
+	position: fixed;
+	bottom: 10px;
+	right: 10px;
+	z-index: 999;
+}
+
+.cookie-settings button {
+	background: rgba(0, 0, 0, 0.9);
+	color: white;
+	border: none;
+	padding: 20px 20px;
+	border-radius: 100%;
+	cursor: pointer;
+}
+
+.cookie-settings button:hover {
+	background: #555;
+}
+
 /* Animations */
 @keyframes fadeIn {
     from {
