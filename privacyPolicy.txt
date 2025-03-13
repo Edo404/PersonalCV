@@ -1,0 +1,43 @@
+Privacy Policy di Edoardo Gamurrini
+
+La privacy dei nostri utenti è molto importante per noi. In questa Privacy Policy, ti informiamo su come raccogliamo, utilizziamo e proteggiamo i tuoi dati personali quando interagisci con il nostro sito web www.edoardogamurrini.netlify.app. Ti invitiamo a leggere attentamente questa politica per comprendere come trattiamo le tue informazioni.
+
+1. Chi siamo
+Il sito web è gestito da Edoardo Gamurrini. Puoi contattarci via email all'indirizzo: edoardogamurrini@gmail.com.
+
+2. Dati raccolti
+Raccogliamo i seguenti dati personali quando interagisci con il nostro sito:
+- Nome e Cognome
+- Indirizzo email
+- Cookie di navigazione, tra cui quelli di Google Analytics per raccogliere informazioni sulle modalità di utilizzo del sito.
+
+3. Come raccogliamo i dati
+I dati vengono raccolti tramite:
+- Moduli di contatto: quando invii una richiesta tramite i nostri moduli.
+- Cookie: quando navighi nel nostro sito, utilizziamo cookie per raccogliere informazioni relative alla tua attività sul nostro sito (come le pagine visitate e la durata della tua visita).
+
+4. Utilizzo dei dati
+I dati raccolti vengono utilizzati per:
+- Migliorare l’esperienza sul nostro sito web.
+- Contattarti per rispondere alle tue richieste o per fornirti informazioni relative ai servizi che offriamo.
+
+5. Condivisione dei dati
+I tuoi dati personali non vengono condivisi con terze parti. Non vendiamo, scambiamo o affittiamo i tuoi dati a nessuno.
+
+6. Sicurezza dei dati
+Sebbene non siano implementate misure di sicurezza particolari, trattiamo i dati personali con attenzione e proteggiamo le informazioni raccolte da accessi non autorizzati. Utilizziamo solo cookie di Google Analytics per raccogliere informazioni anonime sul comportamento di navigazione degli utenti.
+
+7. Diritti degli utenti
+Gli utenti hanno il diritto di accettare o rifiutare i cookie tramite le impostazioni del browser o durante la navigazione del sito. Non raccogliamo dati sensibili che richiedano un consenso esplicito, ma ti offriamo la possibilità di gestire le tue preferenze sui cookie.
+
+8. Conservazione dei dati
+Non abbiamo informazioni specifiche sulla durata di conservazione dei dati. I dati raccolti tramite i cookie, come quelli di Google Analytics, sono generalmente conservati per un periodo limitato secondo la policy di Google. Ti invitiamo a consultare la [privacy policy di Google Analytics](https://policies.google.com/privacy).
+
+9. Cookie
+Utilizziamo i cookie di Google Analytics per raccogliere informazioni anonime sul comportamento degli utenti durante la navigazione del sito. Questi cookie ci aiutano a migliorare la funzionalità del sito e la tua esperienza di navigazione. Puoi accettare o rifiutare i cookie tramite le impostazioni del browser.
+
+10. Modifiche alla Privacy Policy
+Ci riserviamo il diritto di aggiornare questa Privacy Policy in qualsiasi momento. Le modifiche saranno pubblicate su questa pagina con la data di revisione. Ti invitiamo a consultare periodicamente questa pagina per rimanere aggiornato sulle modifiche.
+
+11. Contatti
+Per qualsiasi domanda o richiesta relativa alla presente Privacy Policy o al trattamento dei tuoi dati personali, puoi contattarci via email all'indirizzo: edoardogamurrini@gmail.com.
