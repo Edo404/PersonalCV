@@ -186,6 +186,27 @@ nav {
     color: var(--primary-light);
 }
 
+.btn-career {
+    display: inline-block;
+    padding: 0.8rem 1rem;
+    color: var(--secondary);
+    background-color: var(--primary-light);
+    border-radius: 4px;
+    font-weight: 500;
+    transition: var(--transition);
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid;
+    border-color: var(--secondary);
+    cursor: pointer;
+}
+
+.btn-career:hover {
+    background-color: var(--secondary-dark);
+    color: var(--primary-light);
+    transform: translateY(-3px);
+}
+
 /* About Section */
 .about {
     background-color: var(--primary-light);

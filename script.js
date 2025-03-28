@@ -55,6 +55,10 @@ fadeElements.forEach((el) => {
 	observer.observe(el);
 });
 
+
+
+
+
 // Filter functionality with smooth transitions
 document.addEventListener("DOMContentLoaded", function () {
 	const certBtn = document.getElementById("certifications-btn");
@@ -62,7 +66,15 @@ document.addEventListener("DOMContentLoaded", function () {
 	const certCards = document.querySelectorAll(".certification-card");
 	const projCards = document.querySelectorAll(".project-card-only");
 
-	// Initial state - show only certifications
+	const subcertBtn = document.querySelectorAll(".btn-career");
+	const subCertifications = document.querySelectorAll(".subcert");
+
+	// Initially hide subcertifications
+	subCertifications.forEach((card) => {
+		card.style.display = "none";
+	});
+
+	// Initial state - show only first-level certifications
 	showCertifications();
 
 	// Button event listeners
@@ -72,6 +84,32 @@ document.addEventListener("DOMContentLoaded", function () {
 
 	projBtn.addEventListener("click", function () {
 		showProjects();
+	});
+
+	// Add click event listeners to each btn-career button
+	subcertBtn.forEach((btn) => {
+		btn.addEventListener("click", function () {
+			// Find the parent certification card
+			const parentCard = btn.closest(".certification-card");
+			
+			// Toggle visibility of subcertifications
+			subCertifications.forEach((card) => {
+				if (card.classList.contains("subcert")) {
+					if (card.style.display === "none") {
+						card.style.display = "flex";
+						card.style.opacity = "0";
+						setTimeout(() => {
+							card.style.opacity = "1";
+						}, 50);
+					} else {
+						card.style.opacity = "0";
+						setTimeout(() => {
+							card.style.display = "none";
+						}, 300);
+					}
+				}
+			});
+		});
 	});
 
 	function showCertifications() {
@@ -88,25 +126,34 @@ document.addEventListener("DOMContentLoaded", function () {
 
 					// Then fade in the certification cards
 					certCards.forEach((certCard) => {
-						certCard.style.display = "flex";
-						certCard.style.opacity = "0";
+						// Only show first-level certification cards
+						if (!certCard.classList.contains("subcert")) {
+							certCard.style.display = "flex";
+							certCard.style.opacity = "0";
 
-						// Small delay before starting to fade in
-						setTimeout(() => {
-							certCard.style.opacity = "1";
-						}, 50);
+							// Small delay before starting to fade in
+							setTimeout(() => {
+								certCard.style.opacity = "1";
+							}, 50);
+						} else {
+							certCard.style.display = "none";
+						}
 					});
 				}, 300);
 			}
 		});
 
-		// If no project cards were visible, directly show certification cards
+		// If no project cards were visible, directly show first-level certification cards
 		if (projCards[0].style.display === "none") {
 			certCards.forEach((card) => {
-				card.style.display = "flex";
-				setTimeout(() => {
-					card.style.opacity = "1";
-				}, 50);
+				if (!card.classList.contains("subcert")) {
+					card.style.display = "flex";
+					setTimeout(() => {
+						card.style.opacity = "1";
+					}, 50);
+				} else {
+					card.style.display = "none";
+				}
 			});
 		}
 	}
@@ -148,6 +195,20 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 	}
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 document.addEventListener("DOMContentLoaded", function () {
 	const banner = document.getElementById("cookie-banner");
