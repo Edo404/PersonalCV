@@ -384,7 +384,7 @@ nav {
 .project-links {
     margin-top: auto;
     display: flex;
-    gap: 1rem;
+    /* gap: 1rem; */
 }
 
 /* Contact Section */
