@@ -6,6 +6,7 @@ export const logos = {
 	nasba: { src: "/postsPics/nasba-png.png", alt: "NASBA", style: { height: "18px", width: "40px" } },
 	bocconi: { src: "/postsPics/Bocconi_University_Logo.svg.png", alt: "Bocconi", style: { height: "15px", width: "80px" } },
 	pendo: { src: "/postsPics/pendo-png.png", alt: "Pendo.io", style: { height: "18px", width: "65px", marginTop: "2px" } },
+	claude: { src: "/postsPics/claude-png.png", alt: "Claude", style: { height: "15px", width: "15px", marginTop: "2px" } },
 };
 
 const certImg = { width: "270px", height: "200px" };
@@ -15,6 +16,36 @@ const badgeImg = { width: "200px", height: "200px" };
 // parent: true  -> certification with a toggle that expands the "sub" certifications
 // sub: true     -> hidden until the parent toggle is opened
 export const items = [
+	{
+		type: "certification",
+		image: "/postsPics/ClaudeAcademy_ClaudeCodeInAction.jpg",
+		imageStyle: certImg,
+		title: "Claude Code in action",
+		description: "Claude Code in action Certification by Anthropic taken on October 2026",
+		tags: ["Certification", "AI"],
+		logos: ["claude"],
+		link: "https://academy.claude.com/verify/d205c8a4cabff5e2dabc3cb86759bf74",
+	},
+	{
+		type: "certification",
+		image: "/postsPics/ClaudeAcademy_ClaudeCode101.jpg",
+		imageStyle: certImg,
+		title: "Claude Code 101",
+		description: "Claude Code 101 Certification by Anthropic taken on September 2026",
+		tags: ["Certification", "AI"],
+		logos: ["claude"],
+		link: "https://academy.claude.com/verify/29f25321810bfa54a6c3f86652d40d76",
+	},
+	{
+		type: "certification",
+		image: "/postsPics/ClaudeAcademy_Claude101.jpg",
+		imageStyle: certImg,
+		title: "Claude 101",
+		description: "Claude 101 Certification by Anthropic taken on September 2026",
+		tags: ["Certification", "AI"],
+		logos: ["claude"],
+		link: "https://academy.claude.com/verify/ba7b5ea6690a1537fa407de0fb5e27dd",
+	},
 	{
 		type: "certification",
 		parent: true,
