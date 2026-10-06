@@ -11,8 +11,6 @@ export const logos = {
 
 const certImg = { width: "270px", height: "200px" };
 const badgeImg = { width: "200px", height: "200px" };
-// Fills the whole card; crops from the top so the badge footer (issuer, date) stays visible
-const coverBottomImg = { objectPosition: "center bottom", transformOrigin: "center bottom" };
 
 // type: "certification" | "project"
 // parent: true  -> certification with a toggle that expands the "sub" certifications
@@ -21,7 +19,7 @@ export const items = [
 	{
 		type: "certification",
 		image: "/postsPics/ClaudeAcademy_ClaudeCodeInAction.jpg",
-		imageStyle: coverBottomImg,
+		imageStyle: certImg,
 		title: "Claude Code in action",
 		description: "Claude Code in action Certification by Anthropic taken on October 2026",
 		tags: ["Certification", "AI"],
@@ -31,7 +29,7 @@ export const items = [
 	{
 		type: "certification",
 		image: "/postsPics/ClaudeAcademy_ClaudeCode101.jpg",
-		imageStyle: coverBottomImg,
+		imageStyle: certImg,
 		title: "Claude Code 101",
 		description: "Claude Code 101 Certification by Anthropic taken on September 2026",
 		tags: ["Certification", "AI"],
@@ -41,7 +39,7 @@ export const items = [
 	{
 		type: "certification",
 		image: "/postsPics/ClaudeAcademy_Claude101.jpg",
-		imageStyle: coverBottomImg,
+		imageStyle: certImg,
 		title: "Claude 101",
 		description: "Claude 101 Certification by Anthropic taken on September 2026",
 		tags: ["Certification", "AI"],
