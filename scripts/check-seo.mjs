@@ -23,6 +23,7 @@ for (const page of pages) {
 	expect(html.includes(page.resume) && html.includes("Avvale S.p.A."), `${page.file}: experience section missing`);
 	expect(html.includes(`<form name="contact"`), `${page.file}: hidden Netlify form missing`);
 	expect(!html.includes("<!--app-"), `${page.file}: unreplaced template marker`);
+	expect(html.includes('<meta name="google-site-verification" content="s30EkCfkMVrDK-4AZyHKVpRIgGa9VcnQojuNBldzUno">'), `${page.file}: Google Search Console tag missing`);
 
 	const blocks = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)];
 	expect(blocks.length > 0, `${page.file}: no JSON-LD`);

@@ -5,6 +5,8 @@ import { timeline } from "./data/resume.js";
 import { LANG_PATHS } from "./i18n/paths.js";
 
 export const SITE_URL = "https://edoardogamurrini.netlify.app";
+// Google Search Console ownership token (must stay on the home page)
+const GOOGLE_SITE_VERIFICATION = "s30EkCfkMVrDK-4AZyHKVpRIgGa9VcnQojuNBldzUno";
 
 const PERSON = {
 	name: "Edoardo Gamurrini",
@@ -89,6 +91,7 @@ export function headTags(lang, t) {
 		`<meta name="author" content="${PERSON.name}">`,
 		`<meta name="robots" content="index, follow, max-image-preview:large">`,
 		`<meta name="theme-color" content="#212529">`,
+		`<meta name="google-site-verification" content="${GOOGLE_SITE_VERIFICATION}">`,
 		`<link rel="canonical" href="${url}">`,
 		`<link rel="alternate" hreflang="it" href="${pageUrl("it")}">`,
 		`<link rel="alternate" hreflang="en" href="${pageUrl("en")}">`,
