@@ -12,10 +12,12 @@ export default function App() {
 	return (
 		<>
 			<Header />
-			<Hero />
-			<About />
-			<Projects />
-			<Contact />
+			<main>
+				<Hero />
+				<About />
+				<Projects />
+				<Contact />
+			</main>
 			<CookieBanner />
 			<footer>
 				<p>{t("footer")}</p>
