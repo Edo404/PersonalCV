@@ -16,8 +16,8 @@ export default function App() {
 			<main>
 				<Hero />
 				<About />
-				<Projects />
 				<Resume />
+				<Projects />
 				<Contact />
 			</main>
 			<CookieBanner />

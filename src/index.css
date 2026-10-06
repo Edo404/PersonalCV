@@ -683,6 +683,8 @@ button.project-tag:hover {
 /* Resume: vertical timeline whose line turns orange while scrolling (progress set in Resume.jsx) */
 .resume {
     background-color: var(--primary-light);
+    /* Same white as About above: a hairline marks the section change */
+    border-top: 1px solid var(--gray-200);
 }
 
 .resume-intro {

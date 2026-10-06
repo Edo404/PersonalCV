@@ -5,8 +5,8 @@ import { scrollToSection } from "../utils/scroll";
 
 const SECTIONS = [
 	{ href: "#about", key: "nav.about" },
-	{ href: "#projects", key: "nav.projects" },
 	{ href: "#experience", key: "nav.experience" },
+	{ href: "#projects", key: "nav.projects" },
 ];
 
 export default function Header() {

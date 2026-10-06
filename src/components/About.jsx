@@ -13,7 +13,10 @@ export default function About() {
 					<div className="about-text">
 						<h2>{t("about.title")}</h2>
 						<p>{t("about.body")}</p>
-						<a href="/_EG_CV_ENG.pdf" target="_blank" rel="noopener noreferrer" className="btn">{t("about.resume")}</a>
+						<a href="https://www.linkedin.com/in/edoardo-gamurrini/" target="_blank" rel="noopener noreferrer" className="btn" aria-label={t("about.connectLabel")}>
+							<i className="fa" aria-hidden="true">{""}</i>
+							{t("about.connect")}
+						</a>
 					</div>
 				</div>
 			</div>

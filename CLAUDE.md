@@ -43,7 +43,7 @@ index.html                 # template: marker <!--app-head--> e <!--app-html--> 
 netlify.toml               # build: npm run build, publish: dist (Netlify serve dist/en/index.html su /en/, piano gratuito)
 public/                    # file statici serviti dalla root (/...)
   og-image.png             # anteprima 1200×630 per LinkedIn/WhatsApp/X (foto, nome, ruolo)
-  _EG_CV_ENG.pdf           # CV aperto dal bottone "Apri il CV / Open Resume" (solo inglese)
+  _EG_CV_ENG.pdf           # CV scaricabile dal bottone "Scarica il CV (PDF)" nella sezione Esperienza (solo inglese)
   privacyPolicy.txt        # linkato dal banner cookie (solo italiano)
   flags/                   # it.svg, en.svg per il selettore lingua
   postsPics/               # tutte le immagini (foto profilo edoardo-gamurrini.png, favicon title-img.png, certificati, loghi, screenshot progetti)
@@ -67,7 +67,7 @@ src/
   components/
     Header.jsx             # navbar "a pillola" scura: foto, sezioni, CTA Contattami, selettore lingua, menu ⋮ su mobile
     Hero.jsx               # sezione #home: ruolo rotante + mazzo di badge
-    About.jsx              # sezione #about + bottone CV
+    About.jsx              # sezione #about + bottone "Collegati" (LinkedIn)
     Resume.jsx             # sezione #experience "Esperienza e formazione": timeline verticale + skills + link al PDF
     Projects.jsx           # sezione #projects: filtro Certifications/Projects, espansione sotto-certificazioni
     ProjectCard.jsx        # singola card + hook useFade (dissolvenza 300ms)
@@ -112,7 +112,7 @@ Tutti i testi dell'interfaccia stanno nei dizionari `src/i18n/it.js` e `src/i18n
   - `DECK_TITLES`: i badge mostrati nel mazzo a destra, presi da `items.js` per titolo (da aggiornare a mano quando arrivano nuove certificazioni). Il mazzo si apre a ventaglio all'hover, si inclina col mouse e porta a `#projects`.
   - Animazioni solo con `transform`/`opacity`, senza librerie. Con `prefers-reduced-motion` il ruolo resta fisso e le transizioni sono disattivate. Entrata del testo via `.fade-in` + `.delay-1..3`.
   - Su richiesta di Edoardo sono stati **rimossi** il "battito" del mazzo e lo step-sequencer di barre in basso: non reintrodurli.
-- **Navbar (ottobre 2026, stile ispirato a un riferimento fornito da Edoardo):** pillola fissa centrata in alto, sfondo `--gray-900`, CTA "Contattami" arancione (`--secondary`) con testo bianco. Nessun effetto allo scroll. Ordine: foto (→ `#home`) · Chi sono · Certificazioni & Progetti · Esperienza · Contattami · selettore lingua (bandiera + codice + freccia, tendina scura). Su mobile: foto · ⋮ · Contattami · bandiera; le sezioni compaiono **solo** cliccando ⋮. I menu si chiudono con click su una voce, click fuori o Esc (`openMenu`: `null | "sections" | "language"`).
+- **Navbar (ottobre 2026, stile ispirato a un riferimento fornito da Edoardo):** pillola fissa centrata in alto, sfondo `--gray-900`, CTA "Contattami" arancione (`--secondary`) con testo bianco. Nessun effetto allo scroll. Ordine: foto (→ `#home`) · Chi sono · Esperienza · Certificazioni & Progetti · Contattami · selettore lingua (bandiera + codice + freccia, tendina scura). Su mobile: foto · ⋮ · Contattami · bandiera; le sezioni compaiono **solo** cliccando ⋮. I menu si chiudono con click su una voce, click fuori o Esc (`openMenu`: `null | "sections" | "language"`).
 - **Bottoni in stile "pill" (allineati alla navbar):** raggio pieno (`999px`), altezza minima 48px, peso 600, nessun sollevamento in hover, leggero `scale(0.97)` al click.
   - Primario (`.btn`, `.submit-btn`, `.nav-cta`, filtro attivo, accetta cookie): arancione `--secondary` con **testo bianco** (scelta di Edoardo), hover `--secondary-dark`.
   - Secondario (`.btn-outline`, bottone tondo `.btn-career` delle sotto-certificazioni): bordo `--gray-900` trasparente, hover pieno scuro.
@@ -128,8 +128,9 @@ Tutti i testi dell'interfaccia stanno nei dizionari `src/i18n/it.js` e `src/i18n
   - Dominio: `SITE_URL` in `src/seo.js` (e la costante in `scripts/check-seo.mjs`). Se si passa a un dominio proprio, cambiare entrambe e rigenerare `public/og-image.png` (contiene l'URL).
   - Luogo: solo "Italia", nessuna città; email mai esposta nei metadati.
   - Azioni esterne a carico di Edoardo: verifica su Google Search Console + invio di `/sitemap.xml`; link al sito da LinkedIn e GitHub.
-- **Sezione "Esperienza e formazione" (`#experience`, ottobre 2026):** tra Progetti e Contatti (alternanza sfondi: bianco). Timeline verticale minimale: linea grigia con riempimento arancione che segue lo scroll (`--progress` = posizione del centro dello schermo sulla lista, calcolato in `Resume.jsx` con listener passivo + `requestAnimationFrame`) e un dot per voce che diventa arancione quando la linea lo raggiunge (classe `is-active`). Sotto: skills e lingue in una griglia a 2 colonne (1 su mobile) e bottone secondario "Scarica il CV (PDF)". Telefono ed email del PDF NON vanno pubblicati sul sito.
+- **Sezione "Esperienza e formazione" (`#experience`, ottobre 2026):** subito dopo About e prima di Certificazioni & Progetti (scelta da portfolio: i recruiter cercano prima ruoli e aziende, le certificazioni fanno da prova a supporto). Sfondo bianco come About, separato da una linea sottile in alto. Timeline verticale minimale: linea grigia con riempimento arancione che segue lo scroll (`--progress` = posizione del centro dello schermo sulla lista, calcolato in `Resume.jsx` con listener passivo + `requestAnimationFrame`) e un dot per voce che diventa arancione quando la linea lo raggiunge (classe `is-active`). Sotto: skills e lingue in una griglia a 2 colonne (1 su mobile) e bottone secondario "Scarica il CV (PDF)". Telefono ed email del PDF NON vanno pubblicati sul sito.
 - **Mazzo di certificazioni della hero:** visibile solo su desktop; sotto 768px `.hero-visual` è nascosto.
+- **Bottone di About:** "Collegati / Connect" con icona LinkedIn, apre il profilo LinkedIn (il CV non si apre più da qui: si scarica dalla sezione Esperienza).
 - **Bottone dei progetti:** icona GitHub di Font Awesome + "Vedi il codice / View source code" (niente `</>`).
 - **Responsive:** breakpoint unico a 768px in `index.css` (navbar con menu ⋮, hero e about su una colonna).
 
