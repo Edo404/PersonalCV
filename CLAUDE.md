@@ -12,6 +12,7 @@ Sito portfolio personale (single page) di Edoardo Gamurrini: presentazione, cert
 - **CSS puro** in un unico file globale: `src/index.css` (variabili colore su `:root`). Nessun CSS-in-JS / Tailwind.
 - **Font Awesome 4.7** da CDN (caricato in `index.html`); le icone sono usate come glifi unicode (`<i className="fa">{""}</i>`).
 - **Netlify Forms** per il form contatti.
+- **Bilingue IT/EN** con un sistema i18n fatto in casa (`src/i18n/`), senza librerie. Italiano di default.
 
 ## Storia
 
@@ -24,7 +25,10 @@ npm install      # dipendenze
 npm run dev      # dev server su http://localhost:5173
 npm run build    # build di produzione in dist/
 npm run preview  # serve la build locale
+npm run check:i18n  # verifica che IT/EN abbiano le stesse chiavi, i tag una label italiana e ogni card description { it, en }
 ```
+
+Dopo ogni modifica ai testi o a `items.js` lanciare `npm run check:i18n` e `npm run build`.
 
 ## Struttura
 
@@ -32,16 +36,24 @@ npm run preview  # serve la build locale
 index.html                 # entry Vite + form Netlify statico nascosto (vedi sotto)
 netlify.toml               # build: npm run build, publish: dist
 public/                    # file statici serviti dalla root (/...)
-  _EG_CV_ENG.pdf           # CV aperto dal bottone "Open Resume"
-  privacyPolicy.txt        # linkato dal banner cookie
+  _EG_CV_ENG.pdf           # CV aperto dal bottone "Apri il CV / Open Resume" (solo inglese)
+  privacyPolicy.txt        # linkato dal banner cookie (solo italiano)
+  flags/                   # it.svg, en.svg per il selettore lingua
   postsPics/               # tutte le immagini (foto profilo 2o.png, favicon title-img.png, certificati, loghi, screenshot progetti)
+scripts/
+  check-i18n.mjs           # controllo completezza traduzioni (npm run check:i18n)
+docs/superpowers/          # spec e piani delle modifiche più grandi
 src/
-  main.jsx                 # bootstrap React
+  main.jsx                 # bootstrap React, avvolge App in LanguageProvider
   App.jsx                  # compone le sezioni + footer
   index.css                # TUTTO lo stile del sito
   data/items.js            # DATI di certificazioni e progetti + mappa loghi
+  i18n/
+    it.js, en.js           # dizionari (stesse chiavi; en.tags vuoto perché i tag sono già in inglese)
+    LanguageContext.jsx    # LanguageProvider + useLanguage() → { lang, setLang, t }, LANGUAGES
+    richText.jsx           # renderBold: "**testo**" → <strong> (usato per il testo About)
   components/
-    Header.jsx             # nav fissa, classe "scrolled" dopo 50px, menu hamburger mobile
+    Header.jsx             # navbar "a pillola" scura: foto, sezioni, CTA Contattami, selettore lingua, menu ⋮ su mobile
     Hero.jsx               # sezione #home: ruolo rotante + mazzo di badge
     About.jsx              # sezione #about + bottone CV
     Projects.jsx           # sezione #projects: filtro Certifications/Projects, espansione sotto-certificazioni
@@ -59,17 +71,18 @@ src/
 Aggiungere un oggetto all'array `items` in `src/data/items.js` (l'ordine dell'array = ordine di visualizzazione). Mettere l'immagine in `public/postsPics/` e referenziarla con path assoluto `/postsPics/...`.
 
 Campi:
-- `type`: `"certification"` o `"project"` (determina in quale filtro compare e il testo del bottone: "View Certification" vs "View Source Code </>").
-- `title` (usato anche come `key` React → deve essere **univoco**), `description`, `link` (bottone principale).
+- `type`: `"certification"` o `"project"` (determina in quale filtro compare e il testo del bottone: "Vedi certificato / View Certification" vs "Vedi codice / View Source Code </>").
+- `title` (nome ufficiale, non si traduce; usato anche come `key` React → deve essere **univoco**), `link` (bottone principale).
+- `description`: **oggetto** `{ it: "...", en: "..." }`. Schema usato: IT "Certificazione <titolo> di <ente>, conseguita a <mese> <anno>", EN "<titolo> Certification by <ente> taken on <Month> <Year>".
 - `image`, `imageStyle` opzionale (es. `certImg` 270×200, `badgeImg` 200×200).
-- `tags`: array di stringhe mostrate come pill.
-- `logos`: array di chiavi della mappa `logos` (microsoft, linkedin, pmi, nasba, bocconi, pendo). Per un nuovo ente, aggiungere prima la voce in `logos`.
+- `tags`: array di chiavi **in inglese** (il filtro lavora sulle chiavi). Per un tag nuovo aggiungere la label italiana in `src/i18n/it.js` → `tags` (in inglese si mostra la chiave stessa).
+- `logos`: array di chiavi della mappa `logos` (microsoft, linkedin, pmi, nasba, bocconi, pendo, claude). Per un nuovo ente, aggiungere prima la voce in `logos`.
 - `titleLink` opzionale: rende cliccabile il titolo (se inizia con `#` fa smooth scroll interno).
 - `parent: true`: la card mostra il bottone freccia che espande/chiude le sotto-certificazioni.
 - `sub: true`: card nascosta finché il `parent` non viene espanso (attualmente le 12 certificazioni PMI/LinkedIn legate a "Career Essentials in Project Management").
 
 ### Cambiare testi
-Hero → `Hero.jsx`, About → `About.jsx`, Contatti → `Contact.jsx`, footer → `App.jsx`, banner cookie (in italiano) → `CookieBanner.jsx`.
+Tutti i testi dell'interfaccia stanno nei dizionari `src/i18n/it.js` e `src/i18n/en.js` (sezioni `nav`, `hero`, `about`, `projects`, `contact`, `footer`, `cookie`): modificare **sempre entrambi** con le stesse chiavi. Nei componenti si leggono con `const { t } = useLanguage(); t("hero.subtitle")`. Il testo About usa `**grassetto**`, reso da `renderBold`. Mai scrivere testo visibile direttamente nel JSX. Eccezioni volute: i ruoli rotanti della hero (`ROLES` in `Hero.jsx`) restano in inglese in entrambe le lingue, i titoli delle card sono nomi ufficiali.
 
 ### Cambiare il CV
 Sostituire `public/_EG_CV_ENG.pdf` mantenendo lo stesso nome.
@@ -85,10 +98,12 @@ Sostituire `public/_EG_CV_ENG.pdf` mantenendo lo stesso nome.
   - `DECK_TITLES`: i badge mostrati nel mazzo a destra, presi da `items.js` per titolo (da aggiornare a mano quando arrivano nuove certificazioni). Il mazzo si apre a ventaglio all'hover, si inclina col mouse e porta a `#projects`.
   - Animazioni solo con `transform`/`opacity`, senza librerie. Con `prefers-reduced-motion` il ruolo resta fisso e le transizioni sono disattivate. Entrata del testo via `.fade-in` + `.delay-1..3`.
   - Su richiesta di Edoardo sono stati **rimossi** il "battito" del mazzo e lo step-sequencer di barre in basso: non reintrodurli.
-- **Responsive:** breakpoint unico a 768px in `index.css` (menu laterale mobile, about su una colonna).
+- **Navbar (ottobre 2026, stile ispirato a un riferimento fornito da Edoardo):** pillola fissa centrata in alto, sfondo `--gray-900`, CTA "Contattami" arancione (`--secondary`) con testo scuro. Nessun effetto allo scroll. Ordine: foto (→ `#home`) · Chi sono · Certificazioni & Progetti · Contattami · selettore lingua (bandiera + codice + freccia, tendina scura). Su mobile: foto · ⋮ · Contattami · bandiera; le sezioni compaiono **solo** cliccando ⋮. I menu si chiudono con click su una voce, click fuori o Esc (`openMenu`: `null | "sections" | "language"`).
+- **Lingua:** default `it`; la scelta è salvata in `localStorage["language"]` e aggiorna `<html lang>`. Privacy policy solo in italiano, CV solo in inglese (scelte esplicite).
+- **Responsive:** breakpoint unico a 768px in `index.css` (navbar con menu ⋮, hero e about su una colonna).
 
 ## Convenzioni
 
 - Indentazione con tab nei file JS/JSX; componenti come `export default function`.
-- Commenti brevi, in inglese nel codice nuovo; i commenti/testi del banner cookie sono in italiano (ereditati dall'originale).
+- Commenti brevi, in inglese nel codice nuovo; alcuni commenti del banner cookie sono in italiano (ereditati dall'originale).
 - Stili inline presenti nel markup originale sono stati mantenuti come oggetti `style={{...}}`.
