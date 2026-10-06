@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edoardo | Portfolio</title>
+    <!-- Dev-only title: production pages get title, meta and JSON-LD from scripts/prerender.mjs -->
+    <title>Edoardo Gamurrini</title>
+    <!--app-head-->
     <link rel="icon" type="image/png" href="/postsPics/title-img.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -18,7 +20,7 @@
         <input type="hidden" name="notification-email" />
     </form>
 
-    <div id="root"></div>
+    <div id="root"><!--app-html--></div>
     <script type="module" src="/src/main.jsx"></script>
 </body>
 </html>
