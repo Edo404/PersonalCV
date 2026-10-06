@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { logos } from "../data/items";
+import { useLanguage } from "../i18n/LanguageContext";
 import { scrollToSection } from "../utils/scroll";
 
 // Fades the card in/out (300ms, matching the CSS transition) instead of toggling it abruptly
@@ -24,6 +25,7 @@ function useFade(visible) {
 
 export default function ProjectCard({ item, visible, onToggleSub, onSelectTag }) {
 	const style = useFade(visible);
+	const { lang, t } = useLanguage();
 	const isInternal = item.titleLink?.startsWith("#");
 
 	return (
@@ -41,11 +43,11 @@ export default function ProjectCard({ item, visible, onToggleSub, onSelectTag })
 						item.title
 					)}
 				</h3>
-				<p>{item.description}</p>
+				<p>{item.description[lang]}</p>
 				<div className="project-tags">
 					{item.tags.map((tag) => (
 						<button key={tag} type="button" className="project-tag" onClick={() => onSelectTag({ kind: "tag", value: tag })}>
-							{tag}
+							{t(`tags.${tag}`, tag)}
 						</button>
 					))}
 					{item.logos?.map((key) => (
@@ -56,7 +58,7 @@ export default function ProjectCard({ item, visible, onToggleSub, onSelectTag })
 				</div>
 				<div className="project-links">
 					<a href={item.link} className="btn">
-						{item.type === "project" ? "View Source Code </>" : "View Certification"}
+						{item.type === "project" ? t("projects.viewSource") : t("projects.viewCertification")}
 					</a>
 					{item.parent && onToggleSub && (
 						<a className="btn-career" onClick={onToggleSub}>

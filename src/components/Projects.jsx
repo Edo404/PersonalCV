@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { items, logos } from "../data/items";
+import { useLanguage } from "../i18n/LanguageContext";
 import ProjectCard from "./ProjectCard";
 
 // tag: null | { kind: "tag" | "logo", value }
@@ -13,6 +14,7 @@ export default function Projects() {
 	const [shownFilter, setShownFilter] = useState(activeFilter);
 	const [subExpanded, setSubExpanded] = useState(false);
 	const timer = useRef();
+	const { t } = useLanguage();
 
 	useEffect(() => () => clearTimeout(timer.current), []);
 
@@ -45,26 +47,26 @@ export default function Projects() {
 	return (
 		<section className="projects" id="projects">
 			<div className="container">
-				<h2>Certifications & Projects</h2>
+				<h2>{t("projects.title")}</h2>
 
 				<div className="filter-buttons" style={{ textAlign: "center", marginBottom: "2rem" }}>
 					<button
 						className={`filter-btn${activeFilter.type === "certification" ? " active" : ""}`}
 						onClick={() => selectType("certification")}
 					>
-						<i style={{ fontSize: "15px" }} className="fa">{""}</i>    Certifications
+						<i style={{ fontSize: "15px" }} className="fa">{""}</i>    {t("projects.certifications")}
 					</button>
 					<button
 						className={`filter-btn${activeFilter.type === "project" ? " active" : ""}`}
 						onClick={() => selectType("project")}
 					>
-						<i style={{ fontSize: "15px" }} className="fa">{""}</i>    Projects
+						<i style={{ fontSize: "15px" }} className="fa">{""}</i>    {t("projects.projects")}
 					</button>
 				</div>
 
 				{activeTag && (
 					<div className="active-tag-filter">
-						<button type="button" className="project-tag active" onClick={() => selectType(activeFilter.type)} title="Remove filter">
+						<button type="button" className="project-tag active" onClick={() => selectType(activeFilter.type)} title={t("projects.removeFilter")}>
 							{activeTag.kind === "logo" ? (
 								<>
 									<span className="active-tag-logo">
@@ -73,7 +75,7 @@ export default function Projects() {
 									{logos[activeTag.value].alt}
 								</>
 							) : (
-								activeTag.value
+								t(`tags.${activeTag.value}`, activeTag.value)
 							)}
 							<span>✕</span>
 						</button>
