@@ -6,7 +6,7 @@ import { LANG_PATHS } from "./i18n/paths.js";
 
 export const SITE_URL = "https://edoardogamurrini.netlify.app";
 // Google Search Console ownership token (must stay on the home page)
-const GOOGLE_SITE_VERIFICATION = "s30EkCfkMVrDK-4AZyHKVpRIgGa9VcnQojuNBldzUno";
+const GOOGLE_SITE_VERIFICATION = "zl8vG2KhvcWw2BR9bInAR1FX3RsbY5VtQWzUtx07whk";
 
 const PERSON = {
 	name: "Edoardo Gamurrini",
