@@ -99,7 +99,7 @@ export default function Hero() {
 		<section className="hero" id="home">
 			<div className="container hero-grid">
 				<div className="hero-content">
-					<h1 className="fade-in">{t("hero.greeting")} <span style={{ color: "var(--secondary)" }}>Edoardo!</span></h1>
+					<h1 className="fade-in">{t("hero.greeting")} <span style={{ color: "var(--secondary)" }}>Edoardo Gamurrini!</span></h1>
 					<h2 className="hero-role fade-in delay-1" aria-label={ROLES.join(", ")}>
 						<RoleRotator />
 					</h2>

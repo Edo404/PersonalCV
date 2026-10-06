@@ -221,7 +221,7 @@ p {
     right: 0;
 }
 
-.nav-dropdown button,
+.nav-dropdown a,
 .nav-sections.is-open a {
     display: flex;
     align-items: center;
@@ -239,13 +239,13 @@ p {
     cursor: pointer;
 }
 
-.nav-dropdown button:hover,
+.nav-dropdown a:hover,
 .nav-sections.is-open a:hover {
     background-color: rgba(255, 255, 255, 0.08);
     color: var(--gray-200);
 }
 
-.nav-dropdown button.is-active {
+.nav-dropdown a.is-active {
     color: var(--secondary);
 }
 

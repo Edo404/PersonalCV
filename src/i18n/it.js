@@ -1,5 +1,11 @@
 // Italian strings (default language)
 export default {
+	// <title>, meta description and structured data (see src/seo.js)
+	meta: {
+		title: "Edoardo Gamurrini | Software Analyst e AI Software Developer",
+		description: "Edoardo Gamurrini, Software Analyst e AI Software Developer in Italia. Portfolio con certificazioni (Claude, Microsoft PL-400, Project Management) e progetti.",
+		jobTitle: "Software Analyst",
+	},
 	nav: {
 		home: "Torna all'inizio",
 		about: "Chi sono",
@@ -11,15 +17,16 @@ export default {
 	languages: { it: "Italiano", en: "English" },
 	hero: {
 		greeting: "Ciao, sono",
-		subtitle: "Trasformo esigenze di business in software basato sull'AI, dall'analisi al prodotto rilasciato. Prossimo obiettivo: costruire la mia azienda.",
+		subtitle: "Software Analyst in Italia: trasformo esigenze di business in software basato sull'AI, dall'analisi al prodotto rilasciato.",
 		ctaProjects: "Certificazioni & Progetti",
 		ctaContact: "Contattami",
 		deckLabel: "Ultime certificazioni",
 	},
 	about: {
 		title: "Chi sono",
-		body: "**Ciao, sono Edoardo!** Sono un **laureato in Informatica** che ha iniziato come **IT Consultant**, ma curiosità e ambizione mi stanno portando verso il mondo del **Project e Product Management**. Amo la sfida di costruire cose, che si tratti di software, strategie o del mio sogno di avere un giorno un'azienda tutta mia! (settore ancora da definire, ma ci sto lavorando 😊). Fuori dal lavoro, probabilmente mi troverai dietro una **batteria**: sono un **batterista** semi-professionista con una grande passione per **funk, R&B e praticamente ogni genere che abbia groove**. Quando non suono, mi dedico alla **finanza personale**, cercando di far lavorare i soldi **per** me (e non il contrario). Ho una certa dipendenza da **orologi** e **auto**, di quelle che mi fanno passare fin troppo tempo a leggere, informarmi e magari sognare il prossimo acquisto. Mettiamoci in contatto! Sono sempre pronto a parlare di **tecnologia, business, musica, finanza**, o a perdermi davanti a un bell'**orologio** o a un'**auto d'epoca**! 🚀🥁⌚🚗",
+		body: "**Ciao, sono Edoardo Gamurrini!** Sono un **Software Analyst** con base in Italia e un **laureato in Informatica**: ho iniziato come **IT Consultant** e oggi unisco l'analisi allo sviluppo di **software basato sull'AI**, con una forte passione per il **Project e Product Management**. Amo la sfida di costruire cose, che si tratti di software, strategie o del mio sogno di avere un giorno un'azienda tutta mia! (settore ancora da definire, ma ci sto lavorando 😊). Fuori dal lavoro, probabilmente mi troverai dietro una **batteria**: sono un **batterista** semi-professionista con una grande passione per **funk, R&B e praticamente ogni genere che abbia groove**. Quando non suono, mi dedico alla **finanza personale**, cercando di far lavorare i soldi **per** me (e non il contrario). Ho una certa dipendenza da **orologi** e **auto**, di quelle che mi fanno passare fin troppo tempo a leggere, informarmi e magari sognare il prossimo acquisto. Mettiamoci in contatto! Sono sempre pronto a parlare di **tecnologia, business, musica, finanza**, o a perdermi davanti a un bell'**orologio** o a un'**auto d'epoca**! 🚀🥁⌚🚗",
 		resume: "Apri il CV",
+		photoAlt: "Foto di Edoardo Gamurrini",
 	},
 	projects: {
 		title: "Certificazioni & Progetti",
@@ -39,7 +46,7 @@ export default {
 		message: "Il tuo messaggio",
 		send: "Invia messaggio",
 	},
-	footer: "© 2025 Edoardo Gamurrini. Tutti i diritti riservati.",
+	footer: "© 2026 Edoardo Gamurrini. Tutti i diritti riservati.",
 	cookie: {
 		text: "Questo sito utilizza i cookie per migliorare l'esperienza utente.",
 		learnMore: "Scopri di più",

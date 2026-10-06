@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { LANGUAGES, useLanguage } from "../i18n/LanguageContext";
+import { LANG_PATHS } from "../i18n/paths";
 import { scrollToSection } from "../utils/scroll";
 
 const SECTIONS = [
@@ -8,7 +9,7 @@ const SECTIONS = [
 ];
 
 export default function Header() {
-	const { lang, setLang, t } = useLanguage();
+	const { lang, t } = useLanguage();
 	// null | "sections" (mobile ⋮ menu) | "language"
 	const [openMenu, setOpenMenu] = useState(null);
 	const navRef = useRef();
@@ -37,16 +38,17 @@ export default function Header() {
 		scrollToSection(e, href);
 	};
 
-	const chooseLanguage = (code) => {
-		setLang(code);
-		setOpenMenu(null);
+	// Plain links to the other language URL (crawlable); keep the current section when switching
+	const switchLanguage = (e, code) => {
+		e.preventDefault();
+		window.location.assign(LANG_PATHS[code] + window.location.hash);
 	};
 
 	return (
 		<header className="site-header">
 			<nav ref={navRef} className="nav-pill">
 				<a href="#home" className="nav-avatar" aria-label={t("nav.home")} onClick={(e) => go(e, "#home")}>
-					<img src="/postsPics/2o.png" alt="" />
+					<img src="/postsPics/edoardo-gamurrini.png" alt="" />
 				</a>
 				<span className="nav-divider nav-divider-start" aria-hidden="true" />
 
@@ -86,10 +88,17 @@ export default function Header() {
 						<ul className="nav-dropdown">
 							{LANGUAGES.map((code) => (
 								<li key={code}>
-									<button type="button" className={code === lang ? "is-active" : ""} onClick={() => chooseLanguage(code)}>
+									<a
+										href={LANG_PATHS[code]}
+										hrefLang={code}
+										lang={code}
+										className={code === lang ? "is-active" : ""}
+										aria-current={code === lang ? "page" : undefined}
+										onClick={(e) => switchLanguage(e, code)}
+									>
 										<img src={`/flags/${code}.svg`} alt="" className="flag" />
 										{t(`languages.${code}`)}
-									</button>
+									</a>
 								</li>
 							))}
 						</ul>

@@ -9,7 +9,7 @@ export default function About() {
 			<div className="container">
 				<div className="about-content">
 					<div className="about-img">
-						<img src="/postsPics/2o.png" alt="Edoardo Gamurrini" />
+						<img src="/postsPics/edoardo-gamurrini.png" alt={t("about.photoAlt")} />
 					</div>
 					<div className="about-text">
 						<h2>{t("about.title")}</h2>

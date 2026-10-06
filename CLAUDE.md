@@ -43,7 +43,7 @@ public/                    # file statici serviti dalla root (/...)
   _EG_CV_ENG.pdf           # CV aperto dal bottone "Apri il CV / Open Resume" (solo inglese)
   privacyPolicy.txt        # linkato dal banner cookie (solo italiano)
   flags/                   # it.svg, en.svg per il selettore lingua
-  postsPics/               # tutte le immagini (foto profilo 2o.png, favicon title-img.png, certificati, loghi, screenshot progetti)
+  postsPics/               # tutte le immagini (foto profilo edoardo-gamurrini.png, favicon title-img.png, certificati, loghi, screenshot progetti)
 scripts/
   check-i18n.mjs           # controllo completezza traduzioni (npm run check:i18n)
 docs/superpowers/          # spec e piani delle modifiche più grandi
