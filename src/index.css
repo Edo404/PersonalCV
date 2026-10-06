@@ -432,6 +432,23 @@ p {
 }
 
 /* Round icon button next to "View Certification" that expands the sub-certifications */
+/* White chip holding a brand logo inside a button (LinkedIn in About) */
+.btn-logo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    background-color: var(--primary-light);
+}
+
+.btn-logo img {
+    display: block;
+    width: 16px;
+    height: 16px;
+}
+
 .btn-career {
     width: 48px;
     padding: 0;
@@ -488,7 +505,7 @@ p {
 
 /* Projects Section */
 .projects {
-    background-color: var(--primary-gray);
+    background-color: var(--primary-light);
 }
 
 .projects h2,
@@ -569,6 +586,7 @@ p {
 }
 
 .project-card {
+    border: 1px solid var(--gray-200);
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
@@ -682,9 +700,7 @@ button.project-tag:hover {
 
 /* Resume: vertical timeline whose line turns orange while scrolling (progress set in Resume.jsx) */
 .resume {
-    background-color: var(--primary-light);
-    /* Same white as About above: a hairline marks the section change */
-    border-top: 1px solid var(--gray-200);
+    background-color: var(--primary-gray);
 }
 
 .resume-intro {
@@ -787,7 +803,7 @@ button.project-tag:hover {
     max-width: 760px;
     margin: 3.5rem auto 0;
     padding-top: 2.5rem;
-    border-top: 1px solid var(--gray-200);
+    border-top: 1px solid var(--gray-300);
 }
 
 .resume-skills dt {

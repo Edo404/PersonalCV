@@ -1,3 +1,4 @@
+import { logos } from "../data/items";
 import { useLanguage } from "../i18n/LanguageContext";
 
 export default function About() {
@@ -14,7 +15,10 @@ export default function About() {
 						<h2>{t("about.title")}</h2>
 						<p>{t("about.body")}</p>
 						<a href="https://www.linkedin.com/in/edoardo-gamurrini/" target="_blank" rel="noopener noreferrer" className="btn" aria-label={t("about.connectLabel")}>
-							<i className="fa" aria-hidden="true">{""}</i>
+							{/* Same LinkedIn logo as the certification filter, on a white chip */}
+							<span className="btn-logo">
+								<img src={logos.linkedin.src} alt="" />
+							</span>
 							{t("about.connect")}
 						</a>
 					</div>
