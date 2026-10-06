@@ -105,39 +105,24 @@ nav {
 
 /* Hero Section */
 .hero {
-    height: 100vh;
+    min-height: 100vh;
+    min-height: 100dvh;
     display: flex;
     align-items: center;
     position: relative;
     overflow: hidden;
+    padding-top: 6rem;
+    padding-bottom: 6rem;
     background-color: var(--primary-gray);
     color: var(--gray-800);
 }
 
-.hero::after {
-    content: '';
-    position: absolute;
-    bottom: -80px;
-    right: -80px;
-    width: 300px;
-    height: 300px;
-    border-radius: 50%;
-    background: var(--secondary-light);
-    opacity: 0.7;
-    z-index: 1;
-}
-
-.hero::before {
-    content: '';
-    position: absolute;
-    top: -120px;
-    left: -120px;
-    width: 400px;
-    height: 400px;
-    border-radius: 50%;
-    background: var(--gray-300);
-    opacity: 0.5;
-    z-index: 1;
+.hero-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 3rem;
+    align-items: center;
 }
 
 .hero-content {
@@ -155,6 +140,177 @@ nav {
     font-size: 1.5rem;
     font-weight: 400;
     margin-bottom: 2rem;
+}
+
+.hero p {
+    max-width: 46ch;
+    color: var(--gray-700);
+    line-height: 1.6;
+}
+
+/* Rotating role: one change per bar of the groove (timed in Hero.jsx) */
+.role-rotator {
+    position: relative;
+    display: inline-block;
+    font-weight: 600;
+    overflow: hidden;
+    vertical-align: bottom;
+}
+
+.role-sizer {
+    visibility: hidden;
+    white-space: nowrap;
+}
+
+.role {
+    position: absolute;
+    left: 0;
+    top: 0;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateY(100%);
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+}
+
+.role.is-active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.role.is-prev {
+    transform: translateY(-100%);
+}
+
+/* Certification deck: stacked at rest, fans out on hover, tilts with the pointer */
+.hero-visual {
+    display: flex;
+    justify-content: center;
+    perspective: 1000px;
+}
+
+.cert-deck {
+    --tilt-x: 0deg;
+    --tilt-y: 0deg;
+    display: block;
+    width: min(100%, 340px);
+    aspect-ratio: 3 / 2;
+    transform: rotateX(var(--tilt-y)) rotateY(var(--tilt-x));
+    transition: transform 0.3s ease-out;
+}
+
+.deck-pulse {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    animation: deckPulse calc(var(--step) * 16) ease-out infinite;
+}
+
+.deck-card {
+    position: absolute;
+    inset: 0;
+    z-index: calc(10 - var(--i));
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: var(--primary-light);
+    box-shadow: 0 18px 40px rgba(73, 80, 87, 0.18);
+    transform-origin: 50% 140%;
+    transform: translate(var(--dx), var(--dy)) rotate(var(--rest-rot));
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.deck-card img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.cert-deck:hover .deck-card,
+.cert-deck:focus-visible .deck-card {
+    transform: rotate(var(--fan));
+}
+
+.cert-deck:focus-visible {
+    outline: 2px solid var(--secondary);
+    outline-offset: 12px;
+    border-radius: 10px;
+}
+
+@keyframes deckPulse {
+    0% {
+        transform: scale(1.02);
+    }
+
+    20%, 100% {
+        transform: scale(1);
+    }
+}
+
+/* Step-sequencer strip: each bar hits as the playhead passes, then decays */
+.beat-strip {
+    position: absolute;
+    left: 2rem;
+    right: 2rem;
+    bottom: 1.75rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 30px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    pointer-events: none;
+    --cycle: calc(var(--step) * 64);
+}
+
+.beat-bar {
+    width: 3px;
+    border-radius: 2px;
+    background-color: var(--gray-400);
+    transform-origin: bottom;
+    transform: scaleY(0.3);
+    opacity: 0.35;
+    animation: beatHit var(--cycle) linear infinite;
+    animation-delay: calc(var(--step) * var(--n));
+}
+
+.beat-bar.level-1 {
+    height: 10px;
+}
+
+.beat-bar.level-2 {
+    height: 18px;
+    background-color: var(--gray-500);
+}
+
+.beat-bar.level-3 {
+    height: 30px;
+    background-color: var(--secondary);
+}
+
+@keyframes beatHit {
+    0% {
+        transform: scaleY(1);
+        opacity: 0.9;
+    }
+
+    8%, 100% {
+        transform: scaleY(0.3);
+        opacity: 0.35;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .deck-pulse,
+    .beat-bar {
+        animation: none;
+    }
+
+    .role,
+    .cert-deck,
+    .deck-card {
+        transition: none;
+    }
 }
 
 .btn {
@@ -622,7 +778,7 @@ footer {
 }
 
 .fade-in {
-    animation: fadeIn 0.8s ease forwards;
+    animation: fadeIn 0.8s ease both;
 }
 
 .delay-1 {
@@ -646,6 +802,34 @@ footer {
 
     .hero h1 {
         font-size: 2.5rem;
+    }
+
+    .hero {
+        padding-top: 7rem;
+    }
+
+    .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+
+    .hero h2 {
+        font-size: 1.3rem;
+    }
+
+    .cert-deck {
+        width: min(80%, 260px);
+    }
+
+    /* Half the strip on small screens, so the playhead loops twice as often */
+    .beat-strip {
+        left: 1rem;
+        right: 1rem;
+        --cycle: calc(var(--step) * 32);
+    }
+
+    .beat-bar:nth-child(n + 33) {
+        display: none;
     }
 
     .nav-links {
