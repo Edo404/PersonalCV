@@ -77,6 +77,7 @@ Sostituire `public/_EG_CV_ENG.pdf` mantenendo lo stesso nome.
 ## Dettagli di comportamento da preservare
 
 - **Filtro card:** cliccando un filtro, le card visibili sfumano (300ms) e solo dopo compaiono quelle nuove (`activeFilter` aggiorna subito i bottoni, `shownFilter` è ritardato di 300ms). Cambiando filtro le sotto-certificazioni si richiudono.
+- **Filtro per tag/ente:** le pill dei tag e dei loghi nelle card sono `<button>` cliccabili. Il click filtra la sezione attuale per quel tag o ente (`activeFilter.tag = { kind: "tag" | "logo", value }`), con la stessa dissolvenza, e mostra una pill arancione `✕` sotto i bottoni per rimuoverlo. Con un tag attivo le sotto-certificazioni corrispondenti appaiono direttamente e il bottone freccia del parent è nascosto. Un tag presente su tutte le card della sezione (es. "Certification") equivale a "mostra tutto".
 - **Form Netlify in una SPA:** Netlify rileva i form solo nell'HTML statico al deploy, per questo in `index.html` c'è una **copia nascosta** del form `contact` con gli stessi campi. Se si aggiungono/rinominano campi in `Contact.jsx`, aggiornare anche la copia in `index.html`. L'invio è un normale POST nativo (nessun fetch).
 - **Cookie:** la scelta è salvata in `localStorage["cookiePreference"]` (`accepted`/`declined`); il banner compare dopo 1s se non c'è scelta.
 - **Animazioni hero:** gestite solo via CSS (`.fade-in`, `.delay-1..3`).

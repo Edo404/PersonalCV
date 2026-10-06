@@ -22,7 +22,7 @@ function useFade(visible) {
 	return { display: displayed ? "flex" : "none", opacity };
 }
 
-export default function ProjectCard({ item, visible, onToggleSub }) {
+export default function ProjectCard({ item, visible, onToggleSub, onSelectTag }) {
 	const style = useFade(visible);
 	const isInternal = item.titleLink?.startsWith("#");
 
@@ -44,19 +44,21 @@ export default function ProjectCard({ item, visible, onToggleSub }) {
 				<p>{item.description}</p>
 				<div className="project-tags">
 					{item.tags.map((tag) => (
-						<span key={tag} className="project-tag">{tag}</span>
+						<button key={tag} type="button" className="project-tag" onClick={() => onSelectTag({ kind: "tag", value: tag })}>
+							{tag}
+						</button>
 					))}
 					{item.logos?.map((key) => (
-						<span key={key} className="project-tag">
+						<button key={key} type="button" className="project-tag" title={logos[key].alt} onClick={() => onSelectTag({ kind: "logo", value: key })}>
 							<img src={logos[key].src} alt={logos[key].alt} style={logos[key].style} />
-						</span>
+						</button>
 					))}
 				</div>
 				<div className="project-links">
 					<a href={item.link} className="btn">
 						{item.type === "project" ? "View Source Code </>" : "View Certification"}
 					</a>
-					{item.parent && (
+					{item.parent && onToggleSub && (
 						<a className="btn-career" onClick={onToggleSub}>
 							<i style={{ fontSize: "22px" }} className="fa">{""}</i>
 						</a>
