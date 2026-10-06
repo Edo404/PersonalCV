@@ -58,7 +58,14 @@ export default function ProjectCard({ item, visible, onToggleSub, onSelectTag })
 				</div>
 				<div className="project-links">
 					<a href={item.link} className="btn">
-						{item.type === "project" ? t("projects.viewSource") : t("projects.viewCertification")}
+						{item.type === "project" ? (
+							<>
+								<i className="fa" aria-hidden="true">{""}</i>
+								{t("projects.viewSource")}
+							</>
+						) : (
+							t("projects.viewCertification")
+						)}
 					</a>
 					{item.parent && onToggleSub && (
 						<a className="btn-career" onClick={onToggleSub}>

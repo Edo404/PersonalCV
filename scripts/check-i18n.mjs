@@ -2,6 +2,7 @@
 import it from "../src/i18n/it.js";
 import en from "../src/i18n/en.js";
 import { items } from "../src/data/items.js";
+import { skills, timeline } from "../src/data/resume.js";
 
 const errors = [];
 const keysOf = (obj, prefix = "") =>
@@ -23,6 +24,16 @@ for (const item of items) {
 	for (const lang of ["it", "en"]) {
 		if (!item.description?.[lang]) errors.push(`missing ${lang} description: ${item.title}`);
 	}
+}
+
+// Resume entries need every field in both languages
+for (const entry of timeline) {
+	for (const field of ["role", "place", "period", "summary"]) {
+		for (const lang of ["it", "en"]) if (!entry[field]?.[lang]) errors.push(`missing ${lang} ${field}: ${entry.org}`);
+	}
+}
+for (const skill of skills) {
+	for (const lang of ["it", "en"]) if (!skill.group[lang] || !skill.items[lang]) errors.push(`missing ${lang} skill group: ${skill.group.en}`);
 }
 
 if (errors.length) {

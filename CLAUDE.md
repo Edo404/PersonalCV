@@ -59,15 +59,16 @@ src/
   App.jsx                  # compone le sezioni + footer
   index.css                # TUTTO lo stile del sito
   data/items.js            # DATI di certificazioni e progetti + mappa loghi
+  data/resume.js           # DATI del CV: timeline (esperienze + formazione, dalla più recente) e skills, testi { it, en }
   i18n/
     it.js, en.js           # dizionari (stesse chiavi; en.tags vuoto perché i tag sono già in inglese)
     LanguageContext.jsx    # LanguageProvider({ lang }) + useLanguage() → { lang, t }, LANGUAGES
     paths.js               # LANG_PATHS { it: "/", en: "/en/" }, langFromPath(pathname)
-    richText.jsx           # renderBold: "**testo**" → <strong> (usato per il testo About)
   components/
     Header.jsx             # navbar "a pillola" scura: foto, sezioni, CTA Contattami, selettore lingua, menu ⋮ su mobile
     Hero.jsx               # sezione #home: ruolo rotante + mazzo di badge
     About.jsx              # sezione #about + bottone CV
+    Resume.jsx             # sezione #experience "Esperienza e formazione": timeline verticale + skills + link al PDF
     Projects.jsx           # sezione #projects: filtro Certifications/Projects, espansione sotto-certificazioni
     ProjectCard.jsx        # singola card + hook useFade (dissolvenza 300ms)
     Contact.jsx            # sezione #contact: form Netlify + link social
@@ -94,10 +95,11 @@ Campi:
 - `sub: true`: card nascosta finché il `parent` non viene espanso (attualmente le 12 certificazioni PMI/LinkedIn legate a "Career Essentials in Project Management").
 
 ### Cambiare testi
-Tutti i testi dell'interfaccia stanno nei dizionari `src/i18n/it.js` e `src/i18n/en.js` (sezioni `nav`, `hero`, `about`, `projects`, `contact`, `footer`, `cookie`): modificare **sempre entrambi** con le stesse chiavi. Nei componenti si leggono con `const { t } = useLanguage(); t("hero.subtitle")`. Il testo About usa `**grassetto**`, reso da `renderBold`. Mai scrivere testo visibile direttamente nel JSX. Eccezioni volute: i ruoli rotanti della hero (`ROLES` in `Hero.jsx`) restano in inglese in entrambe le lingue, i titoli delle card sono nomi ufficiali.
+Tutti i testi dell'interfaccia stanno nei dizionari `src/i18n/it.js` e `src/i18n/en.js` (sezioni `nav`, `hero`, `about`, `projects`, `contact`, `footer`, `cookie`): modificare **sempre entrambi** con le stesse chiavi. Nei componenti si leggono con `const { t } = useLanguage(); t("hero.subtitle")`. Il testo About è testo semplice: niente grassetti né emoji (richiesta di Edoardo). Mai scrivere testo visibile direttamente nel JSX. Eccezioni volute: i ruoli rotanti della hero (`ROLES` in `Hero.jsx`) restano in inglese in entrambe le lingue, i titoli delle card sono nomi ufficiali.
 
 ### Cambiare il CV
-Sostituire `public/_EG_CV_ENG.pdf` mantenendo lo stesso nome.
+- PDF: sostituire `public/_EG_CV_ENG.pdf` mantenendo lo stesso nome.
+- Sezione "Esperienza e formazione": aggiornare `src/data/resume.js` (stessa fonte del PDF). Ogni voce: `kind` (`work`/`education`), `role`, `place`, `period`, `summary` tutti `{ it, en }`, `org` stringa. Descrizioni brevi (1-2 frasi), con parole chiave concrete e nessun fatto non presente nel CV. Il lavoro attuale ha `period` con "oggi"/"present" e diventa `worksFor` nel JSON-LD; le voci `education` diventano `alumniOf`. `npm run check:i18n` verifica che ogni campo abbia entrambe le lingue.
 
 ## Dettagli di comportamento da preservare
 
@@ -110,9 +112,9 @@ Sostituire `public/_EG_CV_ENG.pdf` mantenendo lo stesso nome.
   - `DECK_TITLES`: i badge mostrati nel mazzo a destra, presi da `items.js` per titolo (da aggiornare a mano quando arrivano nuove certificazioni). Il mazzo si apre a ventaglio all'hover, si inclina col mouse e porta a `#projects`.
   - Animazioni solo con `transform`/`opacity`, senza librerie. Con `prefers-reduced-motion` il ruolo resta fisso e le transizioni sono disattivate. Entrata del testo via `.fade-in` + `.delay-1..3`.
   - Su richiesta di Edoardo sono stati **rimossi** il "battito" del mazzo e lo step-sequencer di barre in basso: non reintrodurli.
-- **Navbar (ottobre 2026, stile ispirato a un riferimento fornito da Edoardo):** pillola fissa centrata in alto, sfondo `--gray-900`, CTA "Contattami" arancione (`--secondary`) con testo scuro. Nessun effetto allo scroll. Ordine: foto (→ `#home`) · Chi sono · Certificazioni & Progetti · Contattami · selettore lingua (bandiera + codice + freccia, tendina scura). Su mobile: foto · ⋮ · Contattami · bandiera; le sezioni compaiono **solo** cliccando ⋮. I menu si chiudono con click su una voce, click fuori o Esc (`openMenu`: `null | "sections" | "language"`).
+- **Navbar (ottobre 2026, stile ispirato a un riferimento fornito da Edoardo):** pillola fissa centrata in alto, sfondo `--gray-900`, CTA "Contattami" arancione (`--secondary`) con testo bianco. Nessun effetto allo scroll. Ordine: foto (→ `#home`) · Chi sono · Certificazioni & Progetti · Esperienza · Contattami · selettore lingua (bandiera + codice + freccia, tendina scura). Su mobile: foto · ⋮ · Contattami · bandiera; le sezioni compaiono **solo** cliccando ⋮. I menu si chiudono con click su una voce, click fuori o Esc (`openMenu`: `null | "sections" | "language"`).
 - **Bottoni in stile "pill" (allineati alla navbar):** raggio pieno (`999px`), altezza minima 48px, peso 600, nessun sollevamento in hover, leggero `scale(0.97)` al click.
-  - Primario (`.btn`, `.submit-btn`, accetta cookie): arancione `--secondary` con testo scuro `--gray-900`, hover `--secondary-light`.
+  - Primario (`.btn`, `.submit-btn`, `.nav-cta`, filtro attivo, accetta cookie): arancione `--secondary` con **testo bianco** (scelta di Edoardo), hover `--secondary-dark`.
   - Secondario (`.btn-outline`, bottone tondo `.btn-career` delle sotto-certificazioni): bordo `--gray-900` trasparente, hover pieno scuro.
   - Filtro Certificazioni/Progetti (`.filter-buttons`): pillola scura come la navbar, opzione attiva arancione.
   - Nuovi bottoni devono seguire queste classi, non introdurre angoli squadrati.
@@ -126,6 +128,9 @@ Sostituire `public/_EG_CV_ENG.pdf` mantenendo lo stesso nome.
   - Dominio: `SITE_URL` in `src/seo.js` (e la costante in `scripts/check-seo.mjs`). Se si passa a un dominio proprio, cambiare entrambe e rigenerare `public/og-image.png` (contiene l'URL).
   - Luogo: solo "Italia", nessuna città; email mai esposta nei metadati.
   - Azioni esterne a carico di Edoardo: verifica su Google Search Console + invio di `/sitemap.xml`; link al sito da LinkedIn e GitHub.
+- **Sezione "Esperienza e formazione" (`#experience`, ottobre 2026):** tra Progetti e Contatti (alternanza sfondi: bianco). Timeline verticale minimale: linea grigia con riempimento arancione che segue lo scroll (`--progress` = posizione del centro dello schermo sulla lista, calcolato in `Resume.jsx` con listener passivo + `requestAnimationFrame`) e un dot per voce che diventa arancione quando la linea lo raggiunge (classe `is-active`). Sotto: skills e lingue in una griglia a 2 colonne (1 su mobile) e bottone secondario "Scarica il CV (PDF)". Telefono ed email del PDF NON vanno pubblicati sul sito.
+- **Mazzo di certificazioni della hero:** visibile solo su desktop; sotto 768px `.hero-visual` è nascosto.
+- **Bottone dei progetti:** icona GitHub di Font Awesome + "Vedi il codice / View source code" (niente `</>`).
 - **Responsive:** breakpoint unico a 768px in `index.css` (navbar con menu ⋮, hero e about su una colonna).
 
 ## Convenzioni

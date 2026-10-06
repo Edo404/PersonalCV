@@ -1,6 +1,7 @@
 // Everything search engines and AI agents read: <head> tags, JSON-LD, robots.txt, sitemap.xml, llms.txt.
 // Used only at build time by scripts/prerender.mjs. Change SITE_URL when moving to a custom domain.
 import { items } from "./data/items.js";
+import { timeline } from "./data/resume.js";
 import { LANG_PATHS } from "./i18n/paths.js";
 
 export const SITE_URL = "https://edoardogamurrini.netlify.app";
@@ -29,6 +30,8 @@ const ISSUERS = {
 };
 
 const pageUrl = (lang) => SITE_URL + LANG_PATHS[lang];
+const currentJob = timeline.find((entry) => entry.kind === "work" && /oggi|present/.test(entry.period.en + entry.period.it));
+const schools = timeline.filter((entry) => entry.kind === "education");
 const certifications = items.filter((item) => item.type === "certification");
 const projects = items.filter((item) => item.type === "project");
 // Skills come from the card tags, minus the generic ones
@@ -56,6 +59,9 @@ export function jsonLd(lang, t) {
 			description: t("meta.description"),
 			address: { "@type": "PostalAddress", addressCountry: PERSON.country },
 			sameAs: PERSON.sameAs,
+			...(currentJob && { worksFor: { "@type": "Organization", name: currentJob.org } }),
+			alumniOf: schools.map((entry) => ({ "@type": "CollegeOrUniversity", name: entry.org })),
+			knowsLanguage: ["it", "en"],
 			knowsAbout: skills,
 			hasCredential: certifications.map((item) => ({
 				"@type": "EducationalOccupationalCredential",
@@ -154,6 +160,9 @@ ${plain(t("about.body"))}
 ## Profiles
 - [LinkedIn](${PERSON.sameAs[0]})
 - [GitHub](${PERSON.sameAs[1]})
+
+## Experience & Education
+${timeline.map((entry) => `- ${entry.role.en}, ${entry.org} (${entry.place.en}, ${entry.period.en}): ${entry.summary.en}`).join("\n")}
 
 ## Certifications
 ${certifications.map((item) => `- [${item.title}](${item.link}): ${item.description.en}${issuers(item) ? ` (issued by ${issuers(item)})` : ""}`).join("\n")}

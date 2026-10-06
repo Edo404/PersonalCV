@@ -140,15 +140,15 @@ p {
     padding: 0.55rem 1.25rem;
     border-radius: 999px;
     background-color: var(--secondary);
-    color: var(--gray-900);
+    color: var(--primary-light);
     font-size: 0.95rem;
     font-weight: 600;
     white-space: nowrap;
 }
 
 .nav-cta:hover {
-    background-color: var(--secondary-light);
-    color: var(--gray-900);
+    background-color: var(--secondary-dark);
+    color: var(--primary-light);
 }
 
 .nav-icon-btn {
@@ -407,16 +407,17 @@ p {
 }
 
 .btn {
+    gap: 0.5rem;
     padding: 0.7rem 1.75rem;
     background-color: var(--secondary);
-    color: var(--gray-900);
+    color: var(--primary-light);
     margin-right: 1rem;
     margin-bottom: 1rem;
 }
 
 .btn:hover {
-    background-color: var(--secondary-light);
-    color: var(--gray-900);
+    background-color: var(--secondary-dark);
+    color: var(--primary-light);
 }
 
 .btn-outline {
@@ -490,7 +491,8 @@ p {
     background-color: var(--primary-gray);
 }
 
-.projects h2 {
+.projects h2,
+.resume h2 {
     text-align: center;
     margin-bottom: 3rem;
     color: var(--gray-800);
@@ -500,7 +502,8 @@ p {
     transform: translateX(-50%);
 }
 
-.projects h2::after {
+.projects h2::after,
+.resume h2::after {
     content: '';
     position: absolute;
     left: 50%;
@@ -555,7 +558,7 @@ p {
 
 .filter-btn.active {
     background-color: var(--secondary);
-    color: var(--gray-900);
+    color: var(--primary-light);
     font-weight: 600;
 }
 
@@ -677,6 +680,136 @@ button.project-tag:hover {
     /* gap: 1rem; */
 }
 
+/* Resume: vertical timeline whose line turns orange while scrolling (progress set in Resume.jsx) */
+.resume {
+    background-color: var(--primary-light);
+}
+
+.resume-intro {
+    max-width: 60ch;
+    margin: -1rem auto 3rem;
+    text-align: center;
+    color: var(--gray-700);
+    line-height: 1.6;
+}
+
+.timeline {
+    --progress: 0;
+    position: relative;
+    max-width: 760px;
+    margin: 0 auto;
+    padding-left: 2.5rem;
+    list-style: none;
+}
+
+/* Grey track and orange fill share the same 2px line */
+.timeline::before,
+.timeline::after {
+    content: '';
+    position: absolute;
+    left: 9px;
+    top: 0.5rem;
+    bottom: 0.5rem;
+    width: 2px;
+    border-radius: 2px;
+}
+
+.timeline::before {
+    background-color: var(--gray-300);
+}
+
+.timeline::after {
+    background-color: var(--secondary);
+    transform-origin: top;
+    transform: scaleY(var(--progress));
+}
+
+.timeline-item {
+    position: relative;
+    padding-bottom: 2.5rem;
+}
+
+.timeline-item:last-child {
+    padding-bottom: 0;
+}
+
+.timeline-dot {
+    position: absolute;
+    left: -37px;
+    top: 0.3rem;
+    z-index: 1;
+    width: 14px;
+    height: 14px;
+    border: 2px solid var(--gray-400);
+    border-radius: 50%;
+    background-color: var(--primary-light);
+    transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+}
+
+.timeline-item.is-active .timeline-dot {
+    background-color: var(--secondary);
+    border-color: var(--secondary);
+    transform: scale(1.15);
+}
+
+.timeline-meta {
+    margin-bottom: 0.25rem;
+    color: var(--gray-600);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.timeline-item h3 {
+    margin-bottom: 0.1rem;
+    font-size: 1.3rem;
+    color: var(--gray-800);
+}
+
+.timeline-org {
+    margin-bottom: 0.5rem;
+    color: var(--gray-700);
+    font-weight: 600;
+}
+
+.timeline-summary {
+    max-width: 62ch;
+    margin-bottom: 0;
+    color: var(--gray-700);
+    line-height: 1.6;
+}
+
+.resume-skills {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem 3rem;
+    max-width: 760px;
+    margin: 3.5rem auto 0;
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--gray-200);
+}
+
+.resume-skills dt {
+    margin-bottom: 0.25rem;
+    color: var(--gray-800);
+    font-weight: 600;
+}
+
+.resume-skills dd {
+    color: var(--gray-700);
+    line-height: 1.6;
+}
+
+.resume-actions {
+    max-width: 760px;
+    margin: 2.5rem auto 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .timeline-dot {
+        transition: none;
+    }
+}
+
 /* Contact Section */
 .contact {
     background-color: var(--gray-800);
@@ -734,11 +867,11 @@ button.project-tag:hover {
 .submit-btn {
     padding: 0.7rem 2rem;
     background-color: var(--secondary);
-    color: var(--gray-900);
+    color: var(--primary-light);
 }
 
 .submit-btn:hover {
-    background-color: var(--secondary-light);
+    background-color: var(--secondary-dark);
 }
 
 /* Social Icons */
@@ -815,11 +948,11 @@ footer {
 
 #accept-cookies {
 	background-color: var(--secondary);
-	color: var(--gray-900);
+	color: var(--primary-light);
 }
 
 #accept-cookies:hover {
-	background-color: var(--secondary-light);
+	background-color: var(--secondary-dark);
 }
 
 #decline-cookies {
@@ -907,8 +1040,13 @@ footer {
         font-size: 1.3rem;
     }
 
-    .cert-deck {
-        width: min(80%, 260px);
+    /* The certification deck is desktop only */
+    .hero-visual {
+        display: none;
+    }
+
+    .resume-skills {
+        grid-template-columns: 1fr;
     }
 
     .nav-pill {

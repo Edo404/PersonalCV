@@ -7,8 +7,8 @@ const read = (path) => (existsSync(path) ? readFileSync(path, "utf8") : (errors.
 const expect = (cond, msg) => cond || errors.push(msg);
 
 const pages = [
-	{ file: "dist/index.html", lang: "it", url: `${SITE}/`, text: "Chi sono" },
-	{ file: "dist/en/index.html", lang: "en", url: `${SITE}/en/`, text: "About Me" },
+	{ file: "dist/index.html", lang: "it", url: `${SITE}/`, text: "Chi sono", resume: "Esperienza e formazione" },
+	{ file: "dist/en/index.html", lang: "en", url: `${SITE}/en/`, text: "About Me", resume: "Experience &amp; Education" },
 ];
 
 for (const page of pages) {
@@ -20,6 +20,7 @@ for (const page of pages) {
 	expect(html.includes(`hreflang="it"`) && html.includes(`hreflang="en"`) && html.includes(`hreflang="x-default"`), `${page.file}: hreflang links missing`);
 	expect(html.includes(page.text), `${page.file}: prerendered content missing ("${page.text}")`);
 	expect(/<h1[^>]*>.*Edoardo Gamurrini/.test(html), `${page.file}: h1 without full name`);
+	expect(html.includes(page.resume) && html.includes("Avvale S.p.A."), `${page.file}: experience section missing`);
 	expect(html.includes(`<form name="contact"`), `${page.file}: hidden Netlify form missing`);
 	expect(!html.includes("<!--app-"), `${page.file}: unreplaced template marker`);
 
@@ -29,6 +30,7 @@ for (const page of pages) {
 		try {
 			const data = JSON.parse(json);
 			expect(data.mainEntity?.name === "Edoardo Gamurrini", `${page.file}: JSON-LD mainEntity.name wrong`);
+			expect(data.mainEntity?.worksFor?.name === "Avvale S.p.A." && data.mainEntity?.alumniOf?.length === 1, `${page.file}: JSON-LD worksFor/alumniOf missing`);
 		} catch (e) {
 			errors.push(`${page.file}: JSON-LD does not parse (${e.message})`);
 		}

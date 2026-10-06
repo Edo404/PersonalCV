@@ -1,5 +1,4 @@
 import { useLanguage } from "../i18n/LanguageContext";
-import { renderBold } from "../i18n/richText";
 
 export default function About() {
 	const { t } = useLanguage();
@@ -13,7 +12,7 @@ export default function About() {
 					</div>
 					<div className="about-text">
 						<h2>{t("about.title")}</h2>
-						<p>{renderBold(t("about.body"))}</p>
+						<p>{t("about.body")}</p>
 						<a href="/_EG_CV_ENG.pdf" target="_blank" rel="noopener noreferrer" className="btn">{t("about.resume")}</a>
 					</div>
 				</div>

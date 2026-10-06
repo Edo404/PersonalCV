@@ -10,6 +10,7 @@ export default {
 		home: "Back to top",
 		about: "About",
 		projects: "Certifications & Projects",
+		experience: "Experience",
 		contact: "Contact me",
 		menu: "Sections",
 		language: "Language",
@@ -24,7 +25,7 @@ export default {
 	},
 	about: {
 		title: "About Me",
-		body: "**Hello, I'm Edoardo Gamurrini!** I'm an Italy-based **Software Analyst** and **Computer Science graduate**: I started out as an **IT Consultant** and today I combine analysis with building **AI-powered software**, with a strong passion for **Project and Product Management**. I love the challenge of building things, whether it's software, strategies, or my dream of running my own business one day! (industry TBD, but I'm working on it 😊). Outside of work, you'll probably find me behind a **drum kit**. I'm a semi-professional **drummer** with a deep love for **funk, R&B, and pretty much any genre that grooves**. When I'm not drumming, I'm diving into **personal finance**, figuring out how to make money work **for** me (and not the other way around). I have a bit of an addiction to **watches** and **cars**, the kind that makes me spend way too much time reading, researching, and maybe daydreaming about my next purchase. Let's connect! I'm always up for talking about **tech, business, music, finance**, or just geeking out over a great **timepiece** or **classic car**! 🚀🥁⌚🚗",
+		body: "Hello, I'm Edoardo Gamurrini! I'm an Italy-based Software Analyst and Computer Science graduate: I started out as an IT Consultant and today I combine analysis with building AI-powered software, with a strong passion for Project and Product Management. I love the challenge of building things, whether it's software, strategies, or my dream of running my own business one day! (industry TBD, but I'm working on it). Outside of work, you'll probably find me behind a drum kit. I'm a semi-professional drummer with a deep love for funk, R&B, and pretty much any genre that grooves. When I'm not drumming, I'm diving into personal finance, figuring out how to make money work for me (and not the other way around). I have a bit of an addiction to watches and cars, the kind that makes me spend way too much time reading, researching, and maybe daydreaming about my next purchase. Let's connect! I'm always up for talking about tech, business, music, finance, or just geeking out over a great timepiece or classic car!",
 		resume: "Open Resume",
 		photoAlt: "Photo of Edoardo Gamurrini",
 	},
@@ -33,8 +34,13 @@ export default {
 		certifications: "Certifications",
 		projects: "Projects",
 		viewCertification: "View Certification",
-		viewSource: "View Source Code </>",
+		viewSource: "View source code",
 		removeFilter: "Remove filter",
+	},
+	resume: {
+		title: "Experience & Education",
+		intro: "Technology consulting and software development, with a growing focus on Product Management: I turn client needs into clear requirements for development teams.",
+		download: "Download resume (PDF)",
 	},
 	contact: {
 		title: "Get In Touch",
