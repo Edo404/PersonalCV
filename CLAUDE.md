@@ -9,7 +9,11 @@ Sito portfolio personale (single page) di Edoardo Gamurrini: presentazione, cert
 ## Stack
 
 - **React 19 + Vite 7**, JavaScript (niente TypeScript), nessun router, nessuna libreria UI.
-- **CSS puro** in un unico file globale: `src/index.css` (variabili colore su `:root`). Nessun CSS-in-JS / Tailwind.
+- **CSS puro** in un unico file globale: `src/index.css` (variabili colore e font su `:root`). Nessun CSS-in-JS / Tailwind.
+- **Font (ottobre 2026), self-hosted con Fontsource** e importati in `src/main.jsx`:
+  - `--font-display`: **Bricolage Grotesque** (variabile, con optical size), per tutti i titoli `h1–h4` (peso 700, tracking -0.02em);
+  - `--font-body`: **Instrument Sans** (variabile), per testo, bottoni, form e navbar.
+  - Non usare link a Google Fonts né tornare al font di sistema.
 - **Font Awesome 4.7** da CDN (caricato in `index.html`); le icone sono usate come glifi unicode (`<i className="fa">{""}</i>`).
 - **Netlify Forms** per il form contatti.
 - **Bilingue IT/EN** con un sistema i18n fatto in casa (`src/i18n/`), senza librerie. Italiano di default.
@@ -99,6 +103,11 @@ Sostituire `public/_EG_CV_ENG.pdf` mantenendo lo stesso nome.
   - Animazioni solo con `transform`/`opacity`, senza librerie. Con `prefers-reduced-motion` il ruolo resta fisso e le transizioni sono disattivate. Entrata del testo via `.fade-in` + `.delay-1..3`.
   - Su richiesta di Edoardo sono stati **rimossi** il "battito" del mazzo e lo step-sequencer di barre in basso: non reintrodurli.
 - **Navbar (ottobre 2026, stile ispirato a un riferimento fornito da Edoardo):** pillola fissa centrata in alto, sfondo `--gray-900`, CTA "Contattami" arancione (`--secondary`) con testo scuro. Nessun effetto allo scroll. Ordine: foto (→ `#home`) · Chi sono · Certificazioni & Progetti · Contattami · selettore lingua (bandiera + codice + freccia, tendina scura). Su mobile: foto · ⋮ · Contattami · bandiera; le sezioni compaiono **solo** cliccando ⋮. I menu si chiudono con click su una voce, click fuori o Esc (`openMenu`: `null | "sections" | "language"`).
+- **Bottoni in stile "pill" (allineati alla navbar):** raggio pieno (`999px`), altezza minima 48px, peso 600, nessun sollevamento in hover, leggero `scale(0.97)` al click.
+  - Primario (`.btn`, `.submit-btn`, accetta cookie): arancione `--secondary` con testo scuro `--gray-900`, hover `--secondary-light`.
+  - Secondario (`.btn-outline`, bottone tondo `.btn-career` delle sotto-certificazioni): bordo `--gray-900` trasparente, hover pieno scuro.
+  - Filtro Certificazioni/Progetti (`.filter-buttons`): pillola scura come la navbar, opzione attiva arancione.
+  - Nuovi bottoni devono seguire queste classi, non introdurre angoli squadrati.
 - **Lingua:** default `it`; la scelta è salvata in `localStorage["language"]` e aggiorna `<html lang>`. Privacy policy solo in italiano, CV solo in inglese (scelte esplicite).
 - **Responsive:** breakpoint unico a 768px in `index.css` (navbar con menu ⋮, hero e about su una colonna).
 
