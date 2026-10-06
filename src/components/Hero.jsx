@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { items } from "../data/items";
+import { useLanguage } from "../i18n/LanguageContext";
 import { scrollToSection } from "../utils/scroll";
 
 const ROLES = ["Software Analyst", "AI Software Developer", "Product Builder"];
@@ -45,6 +46,7 @@ function RoleRotator() {
 
 function CertDeck() {
 	const deck = useRef();
+	const { t } = useLanguage();
 
 	// Tilt follows the pointer through CSS variables, outside React state
 	const tilt = (e) => {
@@ -65,7 +67,7 @@ function CertDeck() {
 				ref={deck}
 				href="#projects"
 				className="cert-deck"
-				aria-label="Latest certifications"
+				aria-label={t("hero.deckLabel")}
 				onClick={(e) => scrollToSection(e, "#projects")}
 				onPointerMove={tilt}
 				onPointerLeave={resetTilt}
@@ -91,18 +93,20 @@ function CertDeck() {
 }
 
 export default function Hero() {
+	const { t } = useLanguage();
+
 	return (
 		<section className="hero" id="home">
 			<div className="container hero-grid">
 				<div className="hero-content">
-					<h1 className="fade-in">Hello, I'm <span style={{ color: "var(--secondary)" }}>Edoardo!</span></h1>
+					<h1 className="fade-in">{t("hero.greeting")} <span style={{ color: "var(--secondary)" }}>Edoardo!</span></h1>
 					<h2 className="hero-role fade-in delay-1" aria-label={ROLES.join(", ")}>
 						<RoleRotator />
 					</h2>
-					<p className="fade-in delay-2">I turn business needs into AI-powered software, from analysis to shipped product. Next goal: building my own business.</p>
+					<p className="fade-in delay-2">{t("hero.subtitle")}</p>
 					<div className="fade-in delay-3">
-						<a href="#projects" className="btn" onClick={(e) => scrollToSection(e, "#projects")}>Certifications & Projects</a>
-						<a href="#contact" className="btn btn-outline" onClick={(e) => scrollToSection(e, "#contact")}>Contact Me</a>
+						<a href="#projects" className="btn" onClick={(e) => scrollToSection(e, "#projects")}>{t("hero.ctaProjects")}</a>
+						<a href="#contact" className="btn btn-outline" onClick={(e) => scrollToSection(e, "#contact")}>{t("hero.ctaContact")}</a>
 					</div>
 				</div>
 				<CertDeck />

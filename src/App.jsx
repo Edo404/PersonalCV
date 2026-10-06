@@ -4,8 +4,11 @@ import About from "./components/About";
 import Projects from "./components/Projects";
 import Contact from "./components/Contact";
 import CookieBanner from "./components/CookieBanner";
+import { useLanguage } from "./i18n/LanguageContext";
 
 export default function App() {
+	const { t } = useLanguage();
+
 	return (
 		<>
 			<Header />
@@ -15,7 +18,7 @@ export default function App() {
 			<Contact />
 			<CookieBanner />
 			<footer>
-				<p>&copy; 2025 Edoardo Gamurrini. All Rights Reserved.</p>
+				<p>{t("footer")}</p>
 			</footer>
 		</>
 	);

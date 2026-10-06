@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useLanguage } from "../i18n/LanguageContext";
 import { disableTrackingCookies, enableTrackingCookies } from "../utils/analytics";
 
 const STORAGE_KEY = "cookiePreference";
@@ -21,6 +22,7 @@ function savePreference(value) {
 
 export default function CookieBanner() {
 	const [show, setShow] = useState(false);
+	const { t } = useLanguage();
 
 	useEffect(() => {
 		const preference = readPreference();
@@ -49,18 +51,18 @@ export default function CookieBanner() {
 		<>
 			<div id="cookie-banner" className={`cookie-banner${show ? " show" : ""}`}>
 				<p>
-					🍪 Questo sito utilizza i cookie per migliorare l'esperienza utente.{" "}
-					<a href="/privacyPolicy.txt" target="_blank" rel="noopener noreferrer" style={{ color: "var(--gray-300)" }}>Scopri di più</a>
+					🍪 {t("cookie.text")}{" "}
+					<a href="/privacyPolicy.txt" target="_blank" rel="noopener noreferrer" style={{ color: "var(--gray-300)" }}>{t("cookie.learnMore")}</a>
 				</p>
 				<div className="buttons">
-					<button id="accept-cookies" onClick={accept}>Accetta</button>
-					<button id="decline-cookies" onClick={decline}>Rifiuta</button>
+					<button id="accept-cookies" onClick={accept}>{t("cookie.accept")}</button>
+					<button id="decline-cookies" onClick={decline}>{t("cookie.decline")}</button>
 				</div>
 			</div>
 
 			{/* Pulsante per modificare la scelta */}
 			<div id="cookie-settings" className="cookie-settings">
-				<button onClick={() => setShow(true)}>🍪</button>
+				<button onClick={() => setShow(true)} aria-label={t("cookie.settings")}>🍪</button>
 			</div>
 		</>
 	);
