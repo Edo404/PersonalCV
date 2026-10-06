@@ -4,13 +4,8 @@ import { scrollToSection } from "../utils/scroll";
 
 const ROLES = ["Software Analyst", "AI Software Developer", "Product Builder"];
 
-// Everything moves on one tempo: 100 BPM, 16th-note steps, role changes once per bar
-const STEP_MS = 150;
-const BAR_MS = STEP_MS * 16;
-
-// One bar of a funk groove: 3 = kick/snare accent, 2 = ghost note, 1 = hi-hat
-const GROOVE = [3, 1, 2, 1, 3, 1, 1, 2, 1, 2, 3, 1, 3, 1, 2, 1];
-const BEAT_BARS = Array.from({ length: 64 }, (_, i) => GROOVE[i % 16]);
+// Role changes once per bar at 100 BPM (4 beats x 600ms)
+const ROLE_INTERVAL_MS = 2400;
 
 const DECK_TITLES = ["Claude Code in action", "Claude Code 101", "Claude 101", "Microsoft PL-400"];
 const DECK = DECK_TITLES.map((title) => items.find((item) => item.title === title)).filter(Boolean);
@@ -29,7 +24,7 @@ function RoleRotator() {
 
 	useEffect(() => {
 		if (prefersReducedMotion()) return;
-		const timer = setInterval(() => setIndex((i) => (i + 1) % ROLES.length), BAR_MS);
+		const timer = setInterval(() => setIndex((i) => (i + 1) % ROLES.length), ROLE_INTERVAL_MS);
 		return () => clearInterval(timer);
 	}, []);
 
@@ -75,23 +70,21 @@ function CertDeck() {
 				onPointerMove={tilt}
 				onPointerLeave={resetTilt}
 			>
-				<span className="deck-pulse">
-					{DECK.map((item, i) => (
-						<span
-							key={item.title}
-							className="deck-card"
-							style={{
-								"--i": i,
-								"--rest-rot": DECK_REST[i].rot,
-								"--dx": DECK_REST[i].dx,
-								"--dy": DECK_REST[i].dy,
-								"--fan": DECK_REST[i].fan,
-							}}
-						>
-							<img src={item.image} alt={item.title} />
-						</span>
-					))}
-				</span>
+				{DECK.map((item, i) => (
+					<span
+						key={item.title}
+						className="deck-card"
+						style={{
+							"--i": i,
+							"--rest-rot": DECK_REST[i].rot,
+							"--dx": DECK_REST[i].dx,
+							"--dy": DECK_REST[i].dy,
+							"--fan": DECK_REST[i].fan,
+						}}
+					>
+						<img src={item.image} alt={item.title} />
+					</span>
+				))}
 			</a>
 		</div>
 	);
@@ -99,7 +92,7 @@ function CertDeck() {
 
 export default function Hero() {
 	return (
-		<section className="hero" id="home" style={{ "--step": `${STEP_MS}ms` }}>
+		<section className="hero" id="home">
 			<div className="container hero-grid">
 				<div className="hero-content">
 					<h1 className="fade-in">Hello, I'm <span style={{ color: "var(--secondary)" }}>Edoardo!</span></h1>
@@ -113,13 +106,6 @@ export default function Hero() {
 					</div>
 				</div>
 				<CertDeck />
-			</div>
-
-			{/* Step-sequencer strip: a playhead sweeps four bars of the groove */}
-			<div className="beat-strip" aria-hidden="true">
-				{BEAT_BARS.map((level, i) => (
-					<span key={i} className={`beat-bar level-${level}`} style={{ "--n": i }} />
-				))}
 			</div>
 		</section>
 	);

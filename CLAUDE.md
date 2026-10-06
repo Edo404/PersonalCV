@@ -42,7 +42,7 @@ src/
   data/items.js            # DATI di certificazioni e progetti + mappa loghi
   components/
     Header.jsx             # nav fissa, classe "scrolled" dopo 50px, menu hamburger mobile
-    Hero.jsx               # sezione #home: ruolo rotante, mazzo di badge, sequencer "groove"
+    Hero.jsx               # sezione #home: ruolo rotante + mazzo di badge
     About.jsx              # sezione #about + bottone CV
     Projects.jsx           # sezione #projects: filtro Certifications/Projects, espansione sotto-certificazioni
     ProjectCard.jsx        # singola card + hook useFade (dissolvenza 300ms)
@@ -80,11 +80,11 @@ Sostituire `public/_EG_CV_ENG.pdf` mantenendo lo stesso nome.
 - **Filtro per tag/ente:** le pill dei tag e dei loghi nelle card sono `<button>` cliccabili. Il click filtra la sezione attuale per quel tag o ente (`activeFilter.tag = { kind: "tag" | "logo", value }`), con la stessa dissolvenza, e mostra una pill arancione `✕` sotto i bottoni per rimuoverlo. Con un tag attivo le sotto-certificazioni corrispondenti appaiono direttamente e il bottone freccia del parent è nascosto. Un tag presente su tutte le card della sezione (es. "Certification") equivale a "mostra tutto".
 - **Form Netlify in una SPA:** Netlify rileva i form solo nell'HTML statico al deploy, per questo in `index.html` c'è una **copia nascosta** del form `contact` con gli stessi campi. Se si aggiungono/rinominano campi in `Contact.jsx`, aggiornare anche la copia in `index.html`. L'invio è un normale POST nativo (nessun fetch).
 - **Cookie:** la scelta è salvata in `localStorage["cookiePreference"]` (`accepted`/`declined`); il banner compare dopo 1s se non c'è scelta.
-- **Hero (ridisegnata a ottobre 2026, tema "groove"):** layout a due colonne (una sotto 768px). Tutto si muove su un unico tempo, 100 BPM, definito in `Hero.jsx` (`STEP_MS` = 150ms, una battuta = 16 step = 2,4s):
-  - `ROLES`: il ruolo sotto il titolo cambia una volta per battuta (Software Analyst / AI Software Developer / Product Builder).
-  - `DECK_TITLES`: i badge mostrati nel mazzo a destra, presi da `items.js` per titolo. Il mazzo si apre a ventaglio all'hover, si inclina col mouse, "pulsa" sul battere e porta a `#projects`.
-  - `GROOVE`: pattern funk a 16 step della striscia di barre in basso (`.beat-strip`): 64 barre su desktop, 32 su mobile.
-  - Animazioni solo con `transform`/`opacity`, senza librerie. Con `prefers-reduced-motion` tutto è statico. Entrata del testo via `.fade-in` + `.delay-1..3`.
+- **Hero (ridisegnata a ottobre 2026):** layout a due colonne (una sotto 768px), configurata in `Hero.jsx`:
+  - `ROLES`: il ruolo sotto il titolo cambia ogni `ROLE_INTERVAL_MS` (2,4s, una battuta a 100 BPM) con scorrimento verticale (Software Analyst / AI Software Developer / Product Builder).
+  - `DECK_TITLES`: i badge mostrati nel mazzo a destra, presi da `items.js` per titolo (da aggiornare a mano quando arrivano nuove certificazioni). Il mazzo si apre a ventaglio all'hover, si inclina col mouse e porta a `#projects`.
+  - Animazioni solo con `transform`/`opacity`, senza librerie. Con `prefers-reduced-motion` il ruolo resta fisso e le transizioni sono disattivate. Entrata del testo via `.fade-in` + `.delay-1..3`.
+  - Su richiesta di Edoardo sono stati **rimossi** il "battito" del mazzo e lo step-sequencer di barre in basso: non reintrodurli.
 - **Responsive:** breakpoint unico a 768px in `index.css` (menu laterale mobile, about su una colonna).
 
 ## Convenzioni

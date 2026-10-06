@@ -148,7 +148,7 @@ nav {
     line-height: 1.6;
 }
 
-/* Rotating role: one change per bar of the groove (timed in Hero.jsx) */
+/* Rotating role (interval set in Hero.jsx) */
 .role-rotator {
     position: relative;
     display: inline-block;
@@ -191,19 +191,12 @@ nav {
 .cert-deck {
     --tilt-x: 0deg;
     --tilt-y: 0deg;
+    position: relative;
     display: block;
     width: min(100%, 340px);
     aspect-ratio: 3 / 2;
     transform: rotateX(var(--tilt-y)) rotateY(var(--tilt-x));
     transition: transform 0.3s ease-out;
-}
-
-.deck-pulse {
-    position: relative;
-    display: block;
-    width: 100%;
-    height: 100%;
-    animation: deckPulse calc(var(--step) * 16) ease-out infinite;
 }
 
 .deck-card {
@@ -237,75 +230,7 @@ nav {
     border-radius: 10px;
 }
 
-@keyframes deckPulse {
-    0% {
-        transform: scale(1.02);
-    }
-
-    20%, 100% {
-        transform: scale(1);
-    }
-}
-
-/* Step-sequencer strip: each bar hits as the playhead passes, then decays */
-.beat-strip {
-    position: absolute;
-    left: 2rem;
-    right: 2rem;
-    bottom: 1.75rem;
-    max-width: 1200px;
-    margin: 0 auto;
-    height: 30px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    pointer-events: none;
-    --cycle: calc(var(--step) * 64);
-}
-
-.beat-bar {
-    width: 3px;
-    border-radius: 2px;
-    background-color: var(--gray-400);
-    transform-origin: bottom;
-    transform: scaleY(0.3);
-    opacity: 0.35;
-    animation: beatHit var(--cycle) linear infinite;
-    animation-delay: calc(var(--step) * var(--n));
-}
-
-.beat-bar.level-1 {
-    height: 10px;
-}
-
-.beat-bar.level-2 {
-    height: 18px;
-    background-color: var(--gray-500);
-}
-
-.beat-bar.level-3 {
-    height: 30px;
-    background-color: var(--secondary);
-}
-
-@keyframes beatHit {
-    0% {
-        transform: scaleY(1);
-        opacity: 0.9;
-    }
-
-    8%, 100% {
-        transform: scaleY(0.3);
-        opacity: 0.35;
-    }
-}
-
 @media (prefers-reduced-motion: reduce) {
-    .deck-pulse,
-    .beat-bar {
-        animation: none;
-    }
-
     .role,
     .cert-deck,
     .deck-card {
@@ -819,17 +744,6 @@ footer {
 
     .cert-deck {
         width: min(80%, 260px);
-    }
-
-    /* Half the strip on small screens, so the playhead loops twice as often */
-    .beat-strip {
-        left: 1rem;
-        right: 1rem;
-        --cycle: calc(var(--step) * 32);
-    }
-
-    .beat-bar:nth-child(n + 33) {
-        display: none;
     }
 
     .nav-links {
