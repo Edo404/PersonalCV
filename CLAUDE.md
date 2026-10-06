@@ -16,7 +16,8 @@ Sito portfolio personale (single page) di Edoardo Gamurrini: presentazione, cert
   - Non usare link a Google Fonts né tornare al font di sistema.
 - **Font Awesome 4.7** da CDN (caricato in `index.html`); le icone sono usate come glifi unicode (`<i className="fa">{""}</i>`).
 - **Netlify Forms** per il form contatti.
-- **Bilingue IT/EN** con un sistema i18n fatto in casa (`src/i18n/`), senza librerie. Italiano di default.
+- **Bilingue IT/EN** con un sistema i18n fatto in casa (`src/i18n/`), senza librerie. Italiano su `/`, inglese su `/en/`.
+- **Prerender statico (SEO + agenti AI):** la build genera HTML completo per ogni lingua con `react-dom/server`; il client fa `hydrateRoot`. Nessun router, nessun framework SSR.
 
 ## Storia
 
@@ -27,34 +28,41 @@ Il sito era originariamente HTML/CSS/JS vanilla (`index.html` + `styles.css` + `
 ```bash
 npm install      # dipendenze
 npm run dev      # dev server su http://localhost:5173
-npm run build    # build di produzione in dist/
-npm run preview  # serve la build locale
+npm run build    # client build + SSR build + prerender → dist/index.html (it), dist/en/index.html (en), robots.txt, sitemap.xml, llms.txt
+npm run preview  # serve la build locale (http://localhost:4173, provare / e /en/)
 npm run check:i18n  # verifica che IT/EN abbiano le stesse chiavi, i tag una label italiana e ogni card description { it, en }
+npm run check:seo   # (dopo build) verifica title, canonical, hreflang, JSON-LD, contenuto prerenderizzato e file per crawler
 ```
 
-Dopo ogni modifica ai testi o a `items.js` lanciare `npm run check:i18n` e `npm run build`.
+Dopo ogni modifica ai testi o a `items.js` lanciare `npm run check:i18n`, `npm run build` e `npm run check:seo`. In `npm run dev` le pagine NON sono prerenderizzate (il client usa `createRoot`): per verificare SEO e idratazione usare `build` + `preview`.
 
 ## Struttura
 
 ```
-index.html                 # entry Vite + form Netlify statico nascosto (vedi sotto)
-netlify.toml               # build: npm run build, publish: dist
+index.html                 # template: marker <!--app-head--> e <!--app-html--> riempiti dal prerender + form Netlify statico nascosto
+netlify.toml               # build: npm run build, publish: dist (Netlify serve dist/en/index.html su /en/, piano gratuito)
 public/                    # file statici serviti dalla root (/...)
+  og-image.png             # anteprima 1200×630 per LinkedIn/WhatsApp/X (foto, nome, ruolo)
   _EG_CV_ENG.pdf           # CV aperto dal bottone "Apri il CV / Open Resume" (solo inglese)
   privacyPolicy.txt        # linkato dal banner cookie (solo italiano)
   flags/                   # it.svg, en.svg per il selettore lingua
   postsPics/               # tutte le immagini (foto profilo edoardo-gamurrini.png, favicon title-img.png, certificati, loghi, screenshot progetti)
 scripts/
   check-i18n.mjs           # controllo completezza traduzioni (npm run check:i18n)
+  prerender.mjs            # ultimo passo della build: scrive le pagine IT/EN e robots.txt, sitemap.xml, llms.txt
+  check-seo.mjs            # controllo dell'output di build (npm run check:seo)
 docs/superpowers/          # spec e piani delle modifiche più grandi
 src/
-  main.jsx                 # bootstrap React, avvolge App in LanguageProvider
+  main.jsx                 # bootstrap client: lingua dall'URL, hydrateRoot se la pagina è prerenderizzata, altrimenti createRoot
+  entry-server.jsx         # render(lang) con renderToString, usato solo da prerender.mjs
+  seo.js                   # SITE_URL, dati persona, <head> (meta, OG, hreflang, JSON-LD), robots.txt, sitemap.xml, llms.txt
   App.jsx                  # compone le sezioni + footer
   index.css                # TUTTO lo stile del sito
   data/items.js            # DATI di certificazioni e progetti + mappa loghi
   i18n/
     it.js, en.js           # dizionari (stesse chiavi; en.tags vuoto perché i tag sono già in inglese)
-    LanguageContext.jsx    # LanguageProvider + useLanguage() → { lang, setLang, t }, LANGUAGES
+    LanguageContext.jsx    # LanguageProvider({ lang }) + useLanguage() → { lang, t }, LANGUAGES
+    paths.js               # LANG_PATHS { it: "/", en: "/en/" }, langFromPath(pathname)
     richText.jsx           # renderBold: "**testo**" → <strong> (usato per il testo About)
   components/
     Header.jsx             # navbar "a pillola" scura: foto, sezioni, CTA Contattami, selettore lingua, menu ⋮ su mobile
@@ -108,7 +116,16 @@ Sostituire `public/_EG_CV_ENG.pdf` mantenendo lo stesso nome.
   - Secondario (`.btn-outline`, bottone tondo `.btn-career` delle sotto-certificazioni): bordo `--gray-900` trasparente, hover pieno scuro.
   - Filtro Certificazioni/Progetti (`.filter-buttons`): pillola scura come la navbar, opzione attiva arancione.
   - Nuovi bottoni devono seguire queste classi, non introdurre angoli squadrati.
-- **Lingua:** default `it`; la scelta è salvata in `localStorage["language"]` e aggiorna `<html lang>`. Privacy policy solo in italiano, CV solo in inglese (scelte esplicite).
+- **Lingua dall'URL:** `/` = italiano, `/en/` (anche `/en`) = inglese, decisa da `langFromPath`. Il selettore lingua contiene link `<a href hreflang>` all'altra URL e mantiene l'ancora corrente (`/#projects` → `/en/#projects`). Nessuna persistenza in `localStorage` (rimossa di proposito: la lingua deve dipendere solo dall'URL per SEO e link condivisi). Privacy policy solo in italiano, CV solo in inglese (scelte esplicite).
+- **SEO e agenti AI (ottobre 2026):**
+  - Obiettivo: primo risultato su Google per "Edoardo Gamurrini" e contenuti leggibili dagli agenti AI senza JavaScript.
+  - `<title>`, meta description e ruolo stanno nei dizionari (`meta.title`, `meta.description`, `meta.jobTitle`); il resto dell'`<head>` è in `src/seo.js`.
+  - Il nome completo "Edoardo Gamurrini" deve restare in title, h1 ("Ciao, sono Edoardo Gamurrini!"), inizio del testo About, alt della foto e JSON-LD. Non rimuoverlo.
+  - JSON-LD `ProfilePage` + `Person`: certificazioni generate da `items.js` (enti dalla mappa `ISSUERS` in `seo.js`: per un nuovo ente aggiungere lì il nome ufficiale), competenze dai tag.
+  - `robots.txt` consente esplicitamente i crawler AI (lista `AI_CRAWLERS`); `llms.txt` è un riassunto in inglese generato da dizionario EN e `items.js`.
+  - Dominio: `SITE_URL` in `src/seo.js` (e la costante in `scripts/check-seo.mjs`). Se si passa a un dominio proprio, cambiare entrambe e rigenerare `public/og-image.png` (contiene l'URL).
+  - Luogo: solo "Italia", nessuna città; email mai esposta nei metadati.
+  - Azioni esterne a carico di Edoardo: verifica su Google Search Console + invio di `/sitemap.xml`; link al sito da LinkedIn e GitHub.
 - **Responsive:** breakpoint unico a 768px in `index.css` (navbar con menu ⋮, hero e about su una colonna).
 
 ## Convenzioni
