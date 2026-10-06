@@ -41,6 +41,8 @@ export default function Header() {
 
 	// Plain links to the other language URL (crawlable); keep the current section when switching
 	const switchLanguage = (e, code) => {
+		// Let the browser handle new-tab/window clicks (Ctrl/Cmd/Shift/Alt or middle button)
+		if (e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
 		e.preventDefault();
 		window.location.assign(LANG_PATHS[code] + window.location.hash);
 	};

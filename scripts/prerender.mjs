@@ -22,8 +22,9 @@ for (const lang of Object.keys(LANG_PATHS)) {
 	const html = template
 		.replace(/<html lang="[^"]*">/, `<html lang="${lang}">`)
 		.replace(/\s*<!-- Dev-only title[^>]*-->\s*<title>[^<]*<\/title>/, "")
-		.replace("<!--app-head-->", headTags(lang, t))
-		.replace("<!--app-html-->", render(lang));
+		// Function replacements: "$&", "$'"... in site text must be inserted literally
+		.replace("<!--app-head-->", () => headTags(lang, t))
+		.replace("<!--app-html-->", () => render(lang));
 
 	const dir = resolve(DIST, `.${LANG_PATHS[lang]}`);
 	mkdirSync(dir, { recursive: true });
