@@ -5,6 +5,7 @@ export const timeline = [
 		kind: "work",
 		role: { it: "IT Consultant", en: "IT Consultant" },
 		org: "Avvale S.p.A.",
+		url: "https://www.avvale.com/",
 		place: { it: "Milano", en: "Milan" },
 		period: { it: "2023 - oggi", en: "2023 - present" },
 		summary: {
@@ -16,6 +17,7 @@ export const timeline = [
 		kind: "education",
 		role: { it: "Laurea in Informatica", en: "Bachelor's Degree in Computer Science" },
 		org: "Università degli Studi di Urbino",
+		url: "https://www.uniurb.it/",
 		place: { it: "Urbino", en: "Urbino" },
 		period: { it: "2023", en: "2023" },
 		summary: {
@@ -27,6 +29,7 @@ export const timeline = [
 		kind: "work",
 		role: { it: "Frontend Developer", en: "Frontend Developer" },
 		org: "kint",
+		url: "https://kint.ch/",
 		place: { it: "Lugano", en: "Lugano" },
 		period: { it: "2021 - 2022", en: "2021 - 2022" },
 		summary: {
@@ -38,6 +41,7 @@ export const timeline = [
 		kind: "work",
 		role: { it: "Software Testing & Research Intern", en: "Software Testing & Research Intern" },
 		org: "Websolute S.p.A.",
+		url: "https://www.websolute.com/",
 		place: { it: "Pesaro", en: "Pesaro" },
 		period: { it: "2021", en: "2021" },
 		summary: {

@@ -61,8 +61,8 @@ export function jsonLd(lang, t) {
 			description: t("meta.description"),
 			address: { "@type": "PostalAddress", addressCountry: PERSON.country },
 			sameAs: PERSON.sameAs,
-			...(currentJob && { worksFor: { "@type": "Organization", name: currentJob.org } }),
-			alumniOf: schools.map((entry) => ({ "@type": "CollegeOrUniversity", name: entry.org })),
+			...(currentJob && { worksFor: { "@type": "Organization", name: currentJob.org, url: currentJob.url } }),
+			alumniOf: schools.map((entry) => ({ "@type": "CollegeOrUniversity", name: entry.org, url: entry.url })),
 			knowsLanguage: ["it", "en"],
 			knowsAbout: skills,
 			hasCredential: certifications.map((item) => ({

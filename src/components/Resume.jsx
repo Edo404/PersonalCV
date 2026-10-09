@@ -52,7 +52,9 @@ export default function Resume() {
 								{entry.period[lang]} · {entry.place[lang]}
 							</p>
 							<h3>{entry.role[lang]}</h3>
-							<p className="timeline-org">{entry.org}</p>
+							<p className="timeline-org">
+								<a href={entry.url} target="_blank" rel="noopener noreferrer">{entry.org}</a>
+							</p>
 							<p className="timeline-summary">{entry.summary[lang]}</p>
 						</li>
 					))}

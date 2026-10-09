@@ -789,6 +789,15 @@ button.project-tag:hover {
     font-weight: 600;
 }
 
+/* Company names link to their sites but keep the plain text look until hovered */
+.timeline-org a {
+    color: inherit;
+}
+
+.timeline-org a:hover {
+    color: var(--secondary);
+}
+
 .timeline-summary {
     max-width: 62ch;
     margin-bottom: 0;

@@ -99,7 +99,7 @@ Tutti i testi dell'interfaccia stanno nei dizionari `src/i18n/it.js` e `src/i18n
 
 ### Cambiare il CV
 - PDF: sostituire `public/_EG_CV_ENG.pdf` mantenendo lo stesso nome.
-- Sezione "Esperienza e formazione": aggiornare `src/data/resume.js` (stessa fonte del PDF). Ogni voce: `kind` (`work`/`education`), `role`, `place`, `period`, `summary` tutti `{ it, en }`, `org` stringa. Descrizioni brevi (1-2 frasi), con parole chiave concrete e nessun fatto non presente nel CV. Il lavoro attuale ha `period` con "oggi"/"present" e diventa `worksFor` nel JSON-LD; le voci `education` diventano `alumniOf`. `npm run check:i18n` verifica che ogni campo abbia entrambe le lingue.
+- Sezione "Esperienza e formazione": aggiornare `src/data/resume.js` (stessa fonte del PDF). Ogni voce: `kind` (`work`/`education`), `role`, `place`, `period`, `summary` tutti `{ it, en }`, `org` stringa, `url` sito dell'azienda/università (il nome in pagina è un link, stesso colore del testo e arancione in hover; finisce anche nel JSON-LD). Descrizioni brevi (1-2 frasi), con parole chiave concrete e nessun fatto non presente nel CV. Il lavoro attuale ha `period` con "oggi"/"present" e diventa `worksFor` nel JSON-LD; le voci `education` diventano `alumniOf`. `npm run check:i18n` verifica che ogni campo abbia entrambe le lingue.
 
 ## Dettagli di comportamento da preservare
 
