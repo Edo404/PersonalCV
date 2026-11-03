@@ -307,8 +307,8 @@ export const items = [
 		title: "kint.ch",
 		titleLink: "https://kint.ch/",
 		description: {
-			it: "Sito aziendale per un'agenzia di comunicazione svizzera con cui collaboro, realizzato nel 2026",
-			en: "Company website for a Swiss communication agency I collaborate with, built in 2026",
+			it: "Sito aziendale per un'agenzia di comunicazione svizzera con cui collaboro, realizzato a ottobre 2026",
+			en: "Company website for a Swiss communication agency I collaborate with, built in October 2026",
 		},
 		tags: ["Project", "Web Development"],
 		link: "https://github.com/kint-studio/kint-website-official",
@@ -319,8 +319,8 @@ export const items = [
 		title: "studioroccaromana.it",
 		titleLink: "https://www.studioroccaromana.it",
 		description: {
-			it: "Sito aziendale di un manager di musica e spettacolo, realizzato da me a luglio 2022 e revisionato nel 2026",
-			en: "Music and Entertainment Manager's Company Website made by me in July 2022 and revised in 2026",
+			it: "Sito aziendale di un manager di musica e spettacolo, realizzato da me a luglio 2022 e revisionato a novembre 2026",
+			en: "Music and Entertainment Manager's Company Website made by me in July 2022 and revised in November 2026",
 		},
 		tags: ["Project", "Web Development"],
 		link: "https://github.com/Edo404/Studioroccaromana",
