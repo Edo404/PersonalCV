@@ -315,6 +315,18 @@ export const items = [
 	},
 	{
 		type: "project",
+		image: "/postsPics/studioroccaromana.jpg",
+		title: "studioroccaromana.it",
+		titleLink: "https://www.studioroccaromana.it",
+		description: {
+			it: "Sito aziendale di un manager di musica e spettacolo, realizzato da me a luglio 2022 e revisionato nel 2026",
+			en: "Music and Entertainment Manager's Company Website made by me in July 2022 and revised in 2026",
+		},
+		tags: ["Project", "Web Development"],
+		link: "https://github.com/Edo404/Studioroccaromana",
+	},
+	{
+		type: "project",
 		image: "/postsPics/portfolio.png",
 		title: "Personal Portfolio",
 		titleLink: "#home",
@@ -324,18 +336,6 @@ export const items = [
 		},
 		tags: ["Project", "Web Development"],
 		link: "https://github.com/Edo404/PersonalCV",
-	},
-	{
-		type: "project",
-		image: "/postsPics/studioroccaromana.jpg",
-		title: "studioroccaromana.it",
-		titleLink: "https://www.studioroccaromana.it",
-		description: {
-			it: "Sito aziendale di un manager di musica e spettacolo, realizzato da me a luglio 2022",
-			en: "Music and Entertainment Manager's Company Website made by me in July 2022",
-		},
-		tags: ["Project", "Web Development"],
-		link: "https://github.com/Edo404/Studioroccaromana",
 	},
 	{
 		type: "project",
