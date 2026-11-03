@@ -303,6 +303,18 @@ export const items = [
 	},
 	{
 		type: "project",
+		image: "/postsPics/kint.webp",
+		title: "kint.ch",
+		titleLink: "https://kint.ch/",
+		description: {
+			it: "Sito aziendale per un'agenzia di comunicazione svizzera con cui collaboro, realizzato nel 2026",
+			en: "Company website for a Swiss communication agency I collaborate with, built in 2026",
+		},
+		tags: ["Project", "Web Development"],
+		link: "https://github.com/kint-studio/kint-website-official",
+	},
+	{
+		type: "project",
 		image: "/postsPics/portfolio.png",
 		title: "Personal Portfolio",
 		titleLink: "#home",
