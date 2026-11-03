@@ -315,7 +315,7 @@ export const items = [
 	},
 	{
 		type: "project",
-		image: "/postsPics/studioroccaromana.webp",
+		image: "/postsPics/studioroccaromana.jpg",
 		title: "studioroccaromana.it",
 		titleLink: "https://www.studioroccaromana.it",
 		description: {
